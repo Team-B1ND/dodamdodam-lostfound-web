@@ -1,3 +1,5 @@
+import { ClassRoom } from "../common/common.type";
+
 export interface Member {
   email: string;
   id: string;
@@ -10,12 +12,7 @@ export interface Member {
 
 export interface MyMemberResponse extends Response {
   data: {
-    classroom: {
-      readonly grade: number;
-      readonly id: number;
-      readonly placeId: number;
-      readonly room: number;
-    };
+    classroom: ClassRoom;
     id: number;
     member: Member;
     number: number;
