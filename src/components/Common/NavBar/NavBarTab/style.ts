@@ -19,6 +19,7 @@ export const NavBarTabItem = styled.div<{ isSelect: boolean }>`
   display: flex;
   align-items: center;
   border-radius: 20px;
+
   ${({ isSelect }) =>
     isSelect
       ? css`
@@ -33,5 +34,6 @@ export const NavBarTabItem = styled.div<{ isSelect: boolean }>`
             opacity: 30%;
             color: white;
           }
+          border-radius: 20px;
         `}
 `;
