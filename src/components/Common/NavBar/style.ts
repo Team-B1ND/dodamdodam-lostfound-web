@@ -1,30 +1,53 @@
 import styled from "styled-components";
+import { palette } from "../../../styles/palettes";
 
 export const NavBarContainer = styled.div`
-  min-width: 320px;
-  height: 95%;
-  background-color: ${({ theme }) => theme.backgroundColor2};
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  min-width: 340px;
+  height: 100%;
   z-index: 1;
-  border-radius: 5px;
   padding: 40px 0px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  background-color: ${({ theme }) => theme.backgroundColor2};
+  padding: 30px;
+  border: 1px solid ${({ theme }) => theme.borderColor};
+  border-top: 0px;
+  border-bottom: 0px;
+`;
+
+export const NavBarLogo = styled.img`
+  height: 34px;
+  object-fit: scale-down;
+  margin-bottom: 20px;
+  margin-right: auto;
+`;
+
+export const NavBarProfileWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: ${palette.sub};
+  border-radius: 25px;
 `;
 
 export const NavBarProfile = styled.img`
-  width: 140px;
-  height: 140px;
+  width: 80px;
+  height: 80px;
   border-radius: 100%;
-  margin-top: 20px;
-  margin-top: 38px;
 `;
 
 export const NavBarName = styled.h1`
-  font-size: 22px;
-  color: black;
+  font-size: 18px;
+  color: white;
   margin-top: 15px;
-  color: ${({ theme }) => theme.contrast};
+  font-weight: bold;
+`;
+
+export const NavBarClassroom = styled.p`
+  font-size: 16px;
+  margin-top: 8px;
+  color: white;
 `;

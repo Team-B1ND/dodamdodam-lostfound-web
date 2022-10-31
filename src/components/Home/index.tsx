@@ -1,5 +1,11 @@
+import { HomeContainer, HomeWrap } from "./style";
+
 const Home = () => {
-  return <div></div>;
+  return (
+    <HomeContainer>
+      <HomeWrap>sss</HomeWrap>
+    </HomeContainer>
+  );
 };
 
 export default Home;
