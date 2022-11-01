@@ -1,5 +1,7 @@
+import { HomeDropdownContainer } from "./style";
+
 const HomeDropdown = () => {
-  return <div></div>;
+  return <HomeDropdownContainer></HomeDropdownContainer>;
 };
 
 export default HomeDropdown;

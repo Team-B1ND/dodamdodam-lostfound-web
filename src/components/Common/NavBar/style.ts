@@ -37,6 +37,7 @@ export const NavBarProfile = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 100%;
+  object-fit: cover;
 `;
 
 export const NavBarName = styled.h1`
