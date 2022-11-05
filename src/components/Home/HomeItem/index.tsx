@@ -1,4 +1,4 @@
-import { LostFound } from "../../../types/lostfound/lostfound.type";
+import { LostFoundPreview } from "../../../types/lostfound/lostfound.type";
 import {
   HomeItemContainer,
   HomeItemContentAuthor,
@@ -10,14 +10,17 @@ import {
 } from "./style";
 import NoImage from "../../../assets/image/common/noImage.svg";
 import TimeCounting from "time-counting";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
-  data: LostFound;
+  data: LostFoundPreview;
 }
 
 const HomeItem = ({ data }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <HomeItemContainer>
+    <HomeItemContainer onClick={() => navigate(`/detail/${data.id}`)}>
       <HomeItemImg src={data.image || NoImage} key={data.id} />
       <HomeItemContentWrap>
         <HomeItemTitle>{data.title}</HomeItemTitle>

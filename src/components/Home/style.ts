@@ -6,6 +6,7 @@ export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  row-gap: 20px;
 `;
 
 export const HomeWrap = styled.div`

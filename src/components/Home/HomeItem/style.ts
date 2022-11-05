@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ellipsisLine } from "../../../styles/libStyle";
 import { palette } from "../../../styles/palettes";
 
 export const HomeItemContainer = styled.div`
@@ -34,6 +35,7 @@ export const HomeItemContentWrap = styled.div`
 export const HomeItemTitle = styled.h1`
   font-size: 14px;
   color: ${({ theme }) => theme.contrast};
+  ${ellipsisLine(1)}
 `;
 
 export const HomeItemContentBottomWrap = styled.div`
@@ -46,6 +48,7 @@ export const HomeItemContentBottomWrap = styled.div`
 export const HomeItemContentAuthor = styled.span`
   font-size: 16px;
   font-weight: 600;
+  color: ${({ theme }) => theme.contrast};
 `;
 
 export const HomeItemContentCreatedAt = styled.span`

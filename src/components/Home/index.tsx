@@ -6,6 +6,7 @@ import {
   useGetLostFoundsLostType,
 } from "../../quries/lostFound/lostFound.query";
 import { homeLostFoundTypeAtom } from "../../store/home/home.store";
+import HomeDropdown from "./HomeDropdown";
 import HomeItem from "./HomeItem";
 import { HomeContainer, HomeWrap } from "./style";
 
@@ -29,6 +30,7 @@ const Home = () => {
 
   useEffect(() => {
     if (inView) {
+      console.log(lostFoundType);
       if (lostFoundType === "LOST") {
         fetchLostFoundLostNextPage();
       } else {
@@ -39,6 +41,7 @@ const Home = () => {
 
   return (
     <HomeContainer>
+      <HomeDropdown />
       <HomeWrap>
         {(() => {
           return lostFoundType === "LOST"
@@ -47,6 +50,7 @@ const Home = () => {
         })()?.pages?.map((page) =>
           page.data.map((item) => <HomeItem data={item} key={item.id} />)
         )}
+        <div ref={ref}>loading...</div>
       </HomeWrap>
     </HomeContainer>
   );

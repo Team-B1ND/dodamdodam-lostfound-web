@@ -10,6 +10,7 @@ import {
   NavBarProfileWrap,
 } from "./style";
 import Logo from "../../../assets/logo/logo.svg";
+import DefaultProfileImage from "../../../assets/image/common/defaultProfile.png";
 
 const NavBar = () => {
   const { data: serverMyMemberData, isLoading: serverMyMemberIsLoading } =
@@ -22,7 +23,10 @@ const NavBar = () => {
         {!serverMyMemberIsLoading && serverMyMemberData && (
           <>
             <NavBarProfile
-              src={serverMyMemberData?.data?.member.profileImage!}
+              src={
+                serverMyMemberData?.data?.member.profileImage! ||
+                DefaultProfileImage
+              }
             />
             <NavBarName>{serverMyMemberData?.data?.member.name}</NavBarName>
             <NavBarClassroom>

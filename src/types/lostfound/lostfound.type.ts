@@ -1,7 +1,7 @@
 import { Member } from "../member/member.type";
 import { Response } from "../util/response.type";
 
-export interface LostFound {
+export interface LostFoundPreview {
   content: string;
   readonly createAt: string;
   readonly id: number;
@@ -12,9 +12,23 @@ export interface LostFound {
   type: LostFoundType;
 }
 
+export interface LostFoundDetail extends LostFoundPreview {
+  comment: LostFoundComment[];
+}
+
+export interface LostFoundComment {
+  comment: string;
+  id: number;
+  member: Member;
+}
+
 export type LostFoundType = "FOUND" | "LOST";
 
 export interface LostFoundsResponse extends Response {
-  data: LostFound[];
+  data: LostFoundPreview[];
   nextPage: number;
+}
+
+export interface LostFoundResponse extends Response {
+  data: LostFoundDetail;
 }

@@ -5,3 +5,12 @@ export interface getLostFoundsLostTypeParam {
 export interface getLostFoundsFoundTypeParam {
   page: number;
 }
+
+export interface getLostFoundParam {
+  id: number;
+}
+
+export interface postLostfoundCommentParam {
+  comment: string;
+  lostFoundId: number;
+}
