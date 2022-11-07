@@ -12,3 +12,7 @@ export const ellipsisLine = (
   -webkit-box-orient: vertical;
   -webkit-line-clamp: ${lineClamp};
 `;
+
+export const skeletonAnimtaion = css`
+  animation: skeleton 1s infinite ease-in-out;
+`;

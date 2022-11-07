@@ -1,6 +1,10 @@
 import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { useQueryClient } from "react-query";
-import { usePostLostFoundComment } from "../../quries/lostFound/lostFound.query";
+import {
+  useDeleteLostFoundComment,
+  usePatchLostFoundComment,
+  usePostLostFoundComment,
+} from "../../quries/lostFound/lostFound.query";
 import { useGetMyMember } from "../../quries/member/member.query";
 
 interface Param {
@@ -12,20 +16,71 @@ const useComment = ({ lostFoundId }: Param) => {
   const [comment, setComment] = useState<string>("");
   const { data } = useGetMyMember();
 
-  const postPostLostFoundCommentMutation = usePostLostFoundComment();
+  const postLostFoundCommentMutation = usePostLostFoundComment();
+  const patchLostFoundCommentMutation = usePatchLostFoundComment();
+  const deleteLostFoundCommentMutation = useDeleteLostFoundComment();
 
   const onChangeComment = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => setComment(e.target.value),
     [setComment]
   );
 
-  const onSubmitComment = async (e: FormEvent) => {
+  const onModifyComment = async (
+    e: FormEvent,
+    comment: string,
+    commentId: number
+  ) => {
     e.preventDefault();
-    if (postPostLostFoundCommentMutation.isLoading) {
+    if (patchLostFoundCommentMutation.isLoading) {
       return;
     }
 
-    postPostLostFoundCommentMutation.mutateAsync(
+    patchLostFoundCommentMutation.mutateAsync(
+      { comment, commentId },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries([
+            "lostfound/useGetLostFound",
+            lostFoundId,
+          ]);
+          window.alert("댓글 수정 성공");
+        },
+        onError: () => {
+          window.alert("댓글 수정 실패");
+        },
+      }
+    );
+  };
+
+  const onDeleteComment = (commentId: number) => {
+    if (deleteLostFoundCommentMutation.isLoading) {
+      return;
+    }
+
+    deleteLostFoundCommentMutation.mutateAsync(
+      { commentId },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries([
+            "lostfound/useGetLostFound",
+            lostFoundId,
+          ]);
+          window.alert("댓글 삭제 성공");
+        },
+        onError: () => {
+          window.alert("댓글 삭제 실패");
+        },
+      }
+    );
+  };
+
+  const onSubmitComment = async (e: FormEvent) => {
+    e.preventDefault();
+    if (postLostFoundCommentMutation.isLoading) {
+      return;
+    }
+
+    postLostFoundCommentMutation.mutateAsync(
       {
         comment,
         lostFoundId,
@@ -49,7 +104,12 @@ const useComment = ({ lostFoundId }: Param) => {
   return {
     comment,
     onChangeComment,
+    onModifyComment,
+    onDeleteComment,
     onSubmitComment,
+    postCommentLoading: postLostFoundCommentMutation.isLoading,
+    patchCommentLoading: patchLostFoundCommentMutation.isLoading,
+    deleteCommentLoading: deleteLostFoundCommentMutation.isLoading,
   };
 };
 

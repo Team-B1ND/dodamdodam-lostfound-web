@@ -5,10 +5,20 @@ import {
   DetailCommentMenuDropdownItemWrap,
 } from "./style";
 import { HiDotsVertical } from "@react-icons/all-files/hi/HiDotsVertical";
-import { useRef, useState } from "react";
+import { Dispatch, memo, SetStateAction, useRef, useState } from "react";
 import useOutsideClick from "../../../../../hooks/common/useOutsideClick";
 
-const DetailCommentMenuDropdown = () => {
+interface Props {
+  commentId: number;
+  setIsModify: Dispatch<SetStateAction<boolean>>;
+  onDeleteComment: (commentId: number) => void;
+}
+
+const DetailCommentMenuDropdown = ({
+  commentId,
+  setIsModify,
+  onDeleteComment,
+}: Props) => {
   const [close, setClose] = useState(true);
   const menuDropdownContainer = useRef<HTMLDivElement>(null);
 
@@ -24,10 +34,12 @@ const DetailCommentMenuDropdown = () => {
       </DetailCommentMenuDropdownIcon>
       {!close && (
         <DetailCommentMenuDropdownItemWrap>
-          <DetailCommentMenuDropdownItem onClick={() => console.log("asds")}>
+          <DetailCommentMenuDropdownItem onClick={() => setIsModify(true)}>
             수정
           </DetailCommentMenuDropdownItem>
-          <DetailCommentMenuDropdownItem onClick={() => console.log("asds")}>
+          <DetailCommentMenuDropdownItem
+            onClick={() => onDeleteComment(commentId)}
+          >
             삭제
           </DetailCommentMenuDropdownItem>
         </DetailCommentMenuDropdownItemWrap>
@@ -36,4 +48,4 @@ const DetailCommentMenuDropdown = () => {
   );
 };
 
-export default DetailCommentMenuDropdown;
+export default memo(DetailCommentMenuDropdown);

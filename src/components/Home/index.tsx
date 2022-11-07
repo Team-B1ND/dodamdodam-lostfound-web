@@ -8,7 +8,8 @@ import {
 import { homeLostFoundTypeAtom } from "../../store/home/home.store";
 import HomeDropdown from "./HomeDropdown";
 import HomeItem from "./HomeItem";
-import { HomeContainer, HomeWrap } from "./style";
+import HomeLoading from "./HomeLoading";
+import { HomeContainer, HomeLoadingContainer, HomeWrap } from "./style";
 
 const Home = () => {
   const { ref, inView } = useInView();
@@ -50,7 +51,9 @@ const Home = () => {
         })()?.pages?.map((page) =>
           page.data.map((item) => <HomeItem data={item} key={item.id} />)
         )}
-        <div ref={ref}>loading...</div>
+        <HomeLoadingContainer ref={ref}>
+          <HomeLoading />
+        </HomeLoadingContainer>
       </HomeWrap>
     </HomeContainer>
   );

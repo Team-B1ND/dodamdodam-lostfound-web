@@ -19,3 +19,12 @@ export const HomeWrap = styled.div`
   row-gap: 20px;
   column-gap: 20px;
 `;
+
+export const HomeLoadingContainer = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  column-gap: 20px;
+`;

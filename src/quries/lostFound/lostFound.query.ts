@@ -1,7 +1,9 @@
 import { useInfiniteQuery, useMutation, useQuery } from "react-query";
 import {
   getLostFoundParam,
-  postLostfoundCommentParam,
+  postLostFoundCommentParam,
+  patchLostFoundCommentParam,
+  deleteLostFoundCommentParam,
 } from "../../repositories/lostFound/lostFound.param";
 import lostFoundRepository from "../../repositories/lostFound/lostFound.repository";
 
@@ -43,8 +45,25 @@ export const useGetLostFound = ({ id }: getLostFoundParam) =>
 
 export const usePostLostFoundComment = () => {
   const mutation = useMutation(
-    ({ comment, lostFoundId }: postLostfoundCommentParam) =>
-      lostFoundRepository.postLostfoundComment({ comment, lostFoundId })
+    ({ comment, lostFoundId }: postLostFoundCommentParam) =>
+      lostFoundRepository.postLostFoundComment({ comment, lostFoundId })
   );
+  return mutation;
+};
+
+export const usePatchLostFoundComment = () => {
+  const mutation = useMutation(
+    ({ comment, commentId }: patchLostFoundCommentParam) =>
+      lostFoundRepository.patchLostFoundComment({ comment, commentId })
+  );
+
+  return mutation;
+};
+
+export const useDeleteLostFoundComment = () => {
+  const mutation = useMutation(({ commentId }: deleteLostFoundCommentParam) =>
+    lostFoundRepository.deleteLostFoundComment({ commentId })
+  );
+
   return mutation;
 };

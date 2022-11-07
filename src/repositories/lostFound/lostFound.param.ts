@@ -10,7 +10,16 @@ export interface getLostFoundParam {
   id: number;
 }
 
-export interface postLostfoundCommentParam {
+export interface postLostFoundCommentParam {
   comment: string;
   lostFoundId: number;
+}
+
+export interface patchLostFoundCommentParam {
+  comment: string;
+  commentId: number;
+}
+
+export interface deleteLostFoundCommentParam {
+  commentId: number;
 }

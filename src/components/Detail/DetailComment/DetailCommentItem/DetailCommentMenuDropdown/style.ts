@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { palette } from "../../../../../styles/palettes";
 
 export const DetailCommentMenuDropdownContainer = styled.div`
-  width: 40px;
+  width: 20px;
   height: 40px;
   position: relative;
   display: flex;
@@ -20,7 +20,7 @@ export const DetailCommentMenuDropdownIcon = styled.div`
 `;
 
 export const DetailCommentMenuDropdownItemWrap = styled.div`
-  width: 115px;
+  width: 90px;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -28,15 +28,15 @@ export const DetailCommentMenuDropdownItemWrap = styled.div`
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.borderColor};
   top: 40px;
-  left: 16px;
+  left: 0px;
 `;
 
 export const DetailCommentMenuDropdownItem = styled.div`
   width: 100%;
-  height: 40px;
+  height: 30px;
   border-bottom: 1px solid ${({ theme }) => theme.borderColor};
   color: ${({ theme }) => theme.contrast};
-  font-size: 18px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;

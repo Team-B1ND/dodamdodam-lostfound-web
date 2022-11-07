@@ -20,7 +20,7 @@ export const DetailCommentInput = styled.input`
   background-color: ${({ theme }) => theme.backgroundColor3};
   border: 0px;
   font-size: 16px;
-  padding: 0px 12px;
+  padding: 0px 35px;
   box-sizing: border-box;
   border-bottom: 1px solid ${({ theme }) => theme.borderColor};
   outline: none;

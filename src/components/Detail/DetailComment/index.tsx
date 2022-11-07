@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { memo } from "react";
 import useComment from "../../../hooks/lostFound/useComment";
 import { LostFoundComment } from "../../../types/lostfound/lostfound.type";
+import Spinner from "../../Common/Spinner/Spinner";
 import DetailCommentItem from "./DetailCommentItem";
 import {
   DetailCommentButton,
@@ -16,7 +17,16 @@ interface Props {
 }
 
 const DetailComment = ({ data, lostFoundId }: Props) => {
-  const { comment, onChangeComment, onSubmitComment } = useComment({
+  const {
+    comment,
+    onChangeComment,
+    onSubmitComment,
+    onModifyComment,
+    onDeleteComment,
+    postCommentLoading,
+    patchCommentLoading,
+    deleteCommentLoading,
+  } = useComment({
     lostFoundId,
   });
 
@@ -33,11 +43,22 @@ const DetailComment = ({ data, lostFoundId }: Props) => {
       </DetailCommentForm>
       <DetailCommentWrap>
         {data.map((item) => (
-          <DetailCommentItem data={item} key={item.id} />
+          <DetailCommentItem
+            data={item}
+            key={item.id}
+            onModifyComment={onModifyComment}
+            onDeleteComment={onDeleteComment}
+          />
         ))}
       </DetailCommentWrap>
+      <Spinner
+        isAbsolute
+        isLoading={
+          postCommentLoading || patchCommentLoading || deleteCommentLoading
+        }
+      />
     </DetailCommentContainer>
   );
 };
 
-export default DetailComment;
+export default memo(DetailComment);

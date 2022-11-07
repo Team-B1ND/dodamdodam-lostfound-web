@@ -32,8 +32,6 @@ const Detail = () => {
     isLoading: serverLostFoundDetailDataIsLoading,
   } = useGetLostFound({ id: Number(lostfoundid) });
 
-  console.log(serverLostFoundDetailData);
-
   return (
     <DetailContainer>
       {!serverLostFoundDetailDataIsLoading && (
