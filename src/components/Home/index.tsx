@@ -8,14 +8,15 @@ import {
 import { homeLostFoundTypeAtom } from "../../store/home/home.store";
 import HomeDropdown from "./HomeDropdown";
 import HomeItem from "./HomeItem";
-import HomeLoading from "./HomeLoading";
-import { HomeContainer, HomeLoadingContainer, HomeWrap } from "./style";
+import { HomeContainer, HomeLoadingItem, HomeWrap } from "./style";
 
 const Home = () => {
   const { ref, inView } = useInView();
   const [lostFoundType, setLostFoundType] = useRecoilState(
     homeLostFoundTypeAtom
   );
+
+  const homeLoadingItemArray = Array.from({ length: 12 });
 
   const {
     data: serverLostFoundFoundData,
@@ -51,9 +52,9 @@ const Home = () => {
         })()?.pages?.map((page) =>
           page.data.map((item) => <HomeItem data={item} key={item.id} />)
         )}
-        <HomeLoadingContainer ref={ref}>
-          <HomeLoading />
-        </HomeLoadingContainer>
+        {homeLoadingItemArray.map((item, idx) => (
+          <HomeLoadingItem key={idx} ref={ref} />
+        ))}
       </HomeWrap>
     </HomeContainer>
   );

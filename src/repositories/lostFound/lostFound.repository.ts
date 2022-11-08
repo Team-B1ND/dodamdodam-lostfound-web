@@ -10,6 +10,7 @@ import {
   getLostFoundsLostTypeParam,
   patchLostFoundCommentParam,
   postLostFoundCommentParam,
+  postLostFoundParam,
 } from "./lostFound.param";
 
 class LostFoundRepository {
@@ -64,6 +65,10 @@ class LostFoundRepository {
     commentId,
   }: deleteLostFoundCommentParam): Promise<void> {
     await customAxios.delete(`/lostfound/comment/${commentId}`);
+  }
+
+  public async postLostFound({ data }: postLostFoundParam): Promise<void> {
+    await customAxios.post("/lostfound", data);
   }
 }
 
