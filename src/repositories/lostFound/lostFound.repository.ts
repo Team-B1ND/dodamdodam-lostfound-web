@@ -2,6 +2,7 @@ import customAxios from "../../lib/axios";
 import {
   LostFoundResponse,
   LostFoundsResponse,
+  MyLostFoundsResponse,
 } from "../../types/lostfound/lostfound.type";
 import {
   deleteLostFoundCommentParam,
@@ -13,6 +14,11 @@ import {
 } from "./lostFound.param";
 
 class LostFoundRepository {
+  public async getMyLostFounds(): Promise<MyLostFoundsResponse> {
+    const { data } = await customAxios.get("/lostfound/my");
+    return data;
+  }
+
   public async getLostFoundsLostType({
     page,
   }: getLostFoundsLostTypeParam): Promise<LostFoundsResponse> {

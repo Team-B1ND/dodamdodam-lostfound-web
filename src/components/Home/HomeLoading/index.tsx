@@ -5,8 +5,8 @@ const HomeLoading = () => {
 
   return (
     <>
-      {homeLoadingItemArray.map((item) => (
-        <HomeLoadingItem />
+      {homeLoadingItemArray.map((item, idx) => (
+        <HomeLoadingItem key={idx} />
       ))}
     </>
   );

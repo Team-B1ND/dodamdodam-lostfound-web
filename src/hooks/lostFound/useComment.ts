@@ -5,7 +5,6 @@ import {
   usePatchLostFoundComment,
   usePostLostFoundComment,
 } from "../../quries/lostFound/lostFound.query";
-import { useGetMyMember } from "../../quries/member/member.query";
 
 interface Param {
   lostFoundId: number;
@@ -14,7 +13,6 @@ interface Param {
 const useComment = ({ lostFoundId }: Param) => {
   const queryClient = useQueryClient();
   const [comment, setComment] = useState<string>("");
-  const { data } = useGetMyMember();
 
   const postLostFoundCommentMutation = usePostLostFoundComment();
   const patchLostFoundCommentMutation = usePatchLostFoundComment();

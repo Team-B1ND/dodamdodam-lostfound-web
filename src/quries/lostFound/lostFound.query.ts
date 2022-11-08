@@ -7,6 +7,16 @@ import {
 } from "../../repositories/lostFound/lostFound.param";
 import lostFoundRepository from "../../repositories/lostFound/lostFound.repository";
 
+export const useGetMyLostFounds = () =>
+  useQuery(
+    "lostFound/getMyLostFounds",
+    () => lostFoundRepository.getMyLostFounds(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  );
+
 export const useGetLostFoundsLostType = () =>
   useInfiniteQuery(
     "lostFound/getLostFoundsLostType",
@@ -34,7 +44,7 @@ export const useGetLostFoundsFoundType = () =>
 
 export const useGetLostFound = ({ id }: getLostFoundParam) =>
   useQuery(
-    ["lostfound/useGetLostFound", id],
+    ["lostFound/useGetLostFound", id],
     () => lostFoundRepository.getLostFound({ id }),
     {
       enabled: !!id,
