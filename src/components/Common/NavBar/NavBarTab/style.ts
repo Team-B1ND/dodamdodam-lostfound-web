@@ -18,15 +18,22 @@ export const NavBarTabItem = styled.div<{ isSelect: boolean }>`
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  border-radius: 20px;
 
   ${({ isSelect }) =>
     isSelect
       ? css`
           background-color: ${palette.main};
           color: white;
-          border-radius: 20px;
         `
       : css`
           color: ${palette.gray[300]};
+
+          &:hover {
+            background-color: ${palette.main};
+            opacity: 30%;
+            color: white;
+          }
+          border-radius: 20px;
         `}
 `;

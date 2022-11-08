@@ -10,22 +10,29 @@ import {
   NavBarProfileWrap,
 } from "./style";
 import Logo from "../../../assets/logo/logo.svg";
+import DefaultProfileImage from "../../../assets/image/common/defaultProfile.png";
 
 const NavBar = () => {
-  const { data, isLoading: myMemberIsLoading } = useGetMyMember();
+  const { data: serverMyMemberData, isLoading: serverMyMemberIsLoading } =
+    useGetMyMember();
 
   return (
     <NavBarContainer>
       <NavBarLogo src={Logo} />
       <NavBarProfileWrap>
-        {!myMemberIsLoading && (
+        {!serverMyMemberIsLoading && serverMyMemberData && (
           <>
-            <NavBarProfile src={data?.data.member.profileImage!} />
-            <NavBarName>{data?.data.member.name}</NavBarName>
+            <NavBarProfile
+              src={
+                serverMyMemberData?.data?.member.profileImage! ||
+                DefaultProfileImage
+              }
+            />
+            <NavBarName>{serverMyMemberData?.data?.member.name}</NavBarName>
             <NavBarClassroom>
               {dataTransform.classRoomTransform(
-                data?.data.classroom!,
-                data?.data.number!
+                serverMyMemberData?.data?.classroom!,
+                serverMyMemberData?.data?.number!
               )}
             </NavBarClassroom>
           </>
