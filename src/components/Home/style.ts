@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { skeletonAnimtaion } from "../../styles/libStyle";
 
 export const HomeContainer = styled.div`
   width: 100%;
@@ -20,11 +21,11 @@ export const HomeWrap = styled.div`
   column-gap: 20px;
 `;
 
-export const HomeLoadingContainer = styled.div`
-  width: 100%;
+export const HomeLoadingItem = styled.div`
+  width: 216px;
+  height: 276px;
+  border-radius: 5px;
   box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 20px;
-  column-gap: 20px;
+
+  ${skeletonAnimtaion}
 `;

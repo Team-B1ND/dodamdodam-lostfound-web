@@ -5,12 +5,15 @@ export interface LostFoundPreview {
   content: string;
   readonly createAt: string;
   readonly id: number;
-  image: string;
+  image: null | string;
   member: Member;
   place: string;
   title: string;
   type: LostFoundType;
 }
+
+export interface LostFoundApply
+  extends Omit<LostFoundPreview, "createAt" | "id" | "member"> {}
 
 export interface LostFoundDetail extends LostFoundPreview {
   comment: LostFoundComment[];

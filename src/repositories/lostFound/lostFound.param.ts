@@ -1,3 +1,5 @@
+import { LostFoundApply } from "../../types/lostfound/lostfound.type";
+
 export interface getLostFoundsLostTypeParam {
   page: number;
 }
@@ -22,4 +24,8 @@ export interface patchLostFoundCommentParam {
 
 export interface deleteLostFoundCommentParam {
   commentId: number;
+}
+
+export interface postLostFoundParam {
+  data: LostFoundApply;
 }
