@@ -4,6 +4,7 @@ import {
   postLostFoundCommentParam,
   patchLostFoundCommentParam,
   deleteLostFoundCommentParam,
+  postLostFoundParam,
 } from "../../repositories/lostFound/lostFound.param";
 import lostFoundRepository from "../../repositories/lostFound/lostFound.repository";
 
@@ -63,6 +64,14 @@ export const usePatchLostFoundComment = () => {
 export const useDeleteLostFoundComment = () => {
   const mutation = useMutation(({ commentId }: deleteLostFoundCommentParam) =>
     lostFoundRepository.deleteLostFoundComment({ commentId })
+  );
+
+  return mutation;
+};
+
+export const usePostLostFound = () => {
+  const mutation = useMutation(({ data }: postLostFoundParam) =>
+    lostFoundRepository.postLostFound({ data })
   );
 
   return mutation;

@@ -48,4 +48,5 @@ export const DetailCommentWrap = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 15px;
+  padding-bottom: 40px;
 `;
