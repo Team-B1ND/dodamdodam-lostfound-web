@@ -29,3 +29,12 @@ export interface deleteLostFoundCommentParam {
 export interface postLostFoundParam {
   data: LostFoundApply;
 }
+
+export interface patchLostFoundParam {
+  data: LostFoundApply;
+  lostFoundId: number;
+}
+
+export interface deleteLostFoundParam {
+  id: number;
+}

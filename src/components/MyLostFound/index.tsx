@@ -1,6 +1,6 @@
 import { useGetMyLostFounds } from "../../quries/lostFound/lostFound.query";
 import MyLostFoundItem from "./MyLostFoundItem";
-import { MyLostFoundContainer } from "./style";
+import { MyLostFoundContainer, MyLostFoundLoadingItem } from "./style";
 
 const MyLostFound = () => {
   const {
@@ -8,10 +8,16 @@ const MyLostFound = () => {
     isLoading: serverMyLostFoundDataIsLoading,
   } = useGetMyLostFounds();
 
+  const loadingItemArray = Array.from({ length: 6 });
+
   return (
     <MyLostFoundContainer>
       {serverMyLostFoundDataIsLoading ? (
-        <>loading...</>
+        <>
+          {loadingItemArray.map((item, idx) => (
+            <MyLostFoundLoadingItem key={idx} />
+          ))}
+        </>
       ) : (
         <>
           {serverMyLostFoundData?.data.map((lostFound) => (

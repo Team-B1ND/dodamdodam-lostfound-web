@@ -11,6 +11,7 @@ const Router = () => {
       <Route path="/detail/:lostfoundid" element={<DetailPage />} />
       <Route path="/my" element={<MyLostFoundPage />} />
       <Route path="/write" element={<WritePage />} />
+      <Route path="/write/:lostfoundid" element={<WritePage />} />
     </Routes>
   );
 };

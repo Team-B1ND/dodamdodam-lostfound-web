@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { skeletonAnimtaion } from "../../styles/libStyle";
 
 export const MyLostFoundContainer = styled.div`
   width: 100%;
@@ -10,4 +11,13 @@ export const MyLostFoundContainer = styled.div`
   box-sizing: border-box;
   padding-top: 54px;
   overflow-y: scroll;
+`;
+
+export const MyLostFoundLoadingItem = styled.div`
+  width: 100%;
+  min-height: 146px;
+  max-height: 146px;
+  border-radius: 5px;
+
+  ${skeletonAnimtaion}
 `;

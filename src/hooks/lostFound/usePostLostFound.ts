@@ -75,8 +75,6 @@ const usePostLostFound = () => {
         },
       }
     );
-
-    console.log(handlePostData);
   };
 
   return {

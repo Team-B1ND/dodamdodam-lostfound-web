@@ -38,7 +38,7 @@ const useComment = ({ lostFoundId }: Param) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([
-            "lostfound/useGetLostFound",
+            "lostfound/getLostFound",
             lostFoundId,
           ]);
           window.alert("댓글 수정 성공");
@@ -60,7 +60,7 @@ const useComment = ({ lostFoundId }: Param) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([
-            "lostfound/useGetLostFound",
+            "lostfound/getLostFound",
             lostFoundId,
           ]);
           window.alert("댓글 삭제 성공");
@@ -86,7 +86,7 @@ const useComment = ({ lostFoundId }: Param) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([
-            "lostfound/useGetLostFound",
+            "lostfound/getLostFound",
             lostFoundId,
           ]);
           window.alert("댓글 등록 성공");

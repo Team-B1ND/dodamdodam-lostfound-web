@@ -1,5 +1,6 @@
 import {
   WriteFormImg,
+  WriteFormImgDeleteButton,
   WriteFormImgInputLabel,
   WriteFormImgInputLabelIcon,
   WriteFormImgInputLabelText,
@@ -17,17 +18,22 @@ import {
 } from "./style";
 import { MdPhotoCamera } from "@react-icons/all-files/md/MdPhotoCamera";
 import useUploadLostFoundImage from "../../../hooks/lostFound/useUploadLostFoundImage";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { writeUploadLostFoundImageAtom } from "../../../store/write/write.store";
 import Spinner from "../../Common/Spinner/Spinner";
 import usePostLostFound from "../../../hooks/lostFound/usePostLostFound";
 import dataTransform from "../../../utils/transform/dataTransform";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useOutsideClick from "../../../hooks/common/useOutsideClick";
 import { VscTriangleDown } from "@react-icons/all-files/vsc/VscTriangleDown";
+import { useParams } from "react-router-dom";
+import useModifyLostFound from "../../../hooks/lostFound/useModifyLostFound";
+import { IoMdClose } from "@react-icons/all-files/io/IoMdClose";
 
 const WriteForm = () => {
-  const image = useRecoilValue(writeUploadLostFoundImageAtom);
+  const { lostfoundid } = useParams();
+
+  const [image, setImage] = useRecoilState(writeUploadLostFoundImageAtom);
 
   const {
     dropHandler,
@@ -46,8 +52,23 @@ const WriteForm = () => {
     isPosting,
   } = usePostLostFound();
 
-  const [close, setClose] = useState(false);
+  const {
+    modifyLostFoundData,
+    onChangeModifyPostData,
+    setModifyLostFoundData,
+    onSubmitModifyPostData,
+    isModifying,
+  } = useModifyLostFound({
+    lostFoundId: lostfoundid,
+  });
+
+  const [isModify] = useState(lostfoundid ? true : false);
+  const [close, setClose] = useState(true);
   const selectInputContainer = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setImage("");
+  }, [setImage]);
 
   useOutsideClick({ ref: selectInputContainer, setState: setClose });
 
@@ -55,10 +76,18 @@ const WriteForm = () => {
     <>
       <WriteFormInputWrap>
         <WriteFormInputTitle>분실물 이미지</WriteFormInputTitle>
-        {<Spinner isAbsolute isLoading={isUploading || isPosting} />}
+        {
+          <Spinner
+            isAbsolute
+            isLoading={isUploading || isPosting || isModifying}
+          />
+        }
         {image ? (
           <WriteFormImgWrap>
             <WriteFormImg src={image!} />
+            <WriteFormImgDeleteButton onClick={() => setImage(null)}>
+              <IoMdClose />
+            </WriteFormImgDeleteButton>
           </WriteFormImgWrap>
         ) : (
           <>
@@ -85,9 +114,9 @@ const WriteForm = () => {
         <WriteFormInputWrap>
           <WriteFormInputTitle>위치</WriteFormInputTitle>
           <WriteFormTextInput
-            value={postData.place}
+            value={isModify ? modifyLostFoundData.place : postData.place}
             placeholder="위치를 입력해주세요"
-            onChange={onChangePostDataText}
+            onChange={isModify ? onChangeModifyPostData : onChangePostDataText}
             name="place"
           />
         </WriteFormInputWrap>
@@ -98,22 +127,37 @@ const WriteForm = () => {
             ref={selectInputContainer}
             onClick={() => setClose((prev) => !prev)}
           >
-            {dataTransform.lostFoundTypeTransform(postData.type)}
+            {dataTransform.lostFoundTypeTransform(
+              isModify ? modifyLostFoundData.type : postData.type
+            )}
             <WriteFormSelectIcon close={close}>
               <VscTriangleDown />
             </WriteFormSelectIcon>
             {!close && (
               <WriteFormSelectItemWrap>
                 <WriteFormSelectItem
-                  onClick={() =>
-                    setPostData((prev) => ({ ...prev, type: "LOST" }))
+                  onClick={
+                    isModify
+                      ? () =>
+                          setModifyLostFoundData((prev) => ({
+                            ...prev,
+                            type: "LOST",
+                          }))
+                      : () => setPostData((prev) => ({ ...prev, type: "LOST" }))
                   }
                 >
                   분실물
                 </WriteFormSelectItem>
                 <WriteFormSelectItem
-                  onClick={() =>
-                    setPostData((prev) => ({ ...prev, type: "FOUND" }))
+                  onClick={
+                    isModify
+                      ? () =>
+                          setModifyLostFoundData((prev) => ({
+                            ...prev,
+                            type: "FOUND",
+                          }))
+                      : () =>
+                          setPostData((prev) => ({ ...prev, type: "FOUND" }))
                   }
                 >
                   습득물
@@ -126,23 +170,25 @@ const WriteForm = () => {
       <WriteFormInputWrap>
         <WriteFormInputTitle>제목</WriteFormInputTitle>
         <WriteFormTextInput
-          value={postData.title}
+          value={isModify ? modifyLostFoundData.title : postData.title}
           placeholder="제목을 입력해주세요"
-          onChange={onChangePostDataText}
+          onChange={isModify ? onChangeModifyPostData : onChangePostDataText}
           name="title"
         />
       </WriteFormInputWrap>
       <WriteFormInputWrap>
         <WriteFormInputTitle>내용</WriteFormInputTitle>
         <WriteFormTextarea
-          value={postData.content}
+          value={isModify ? modifyLostFoundData.content : postData.content}
           placeholder="내용을 입력해주세요"
-          onChange={onChangePostDataText}
+          onChange={isModify ? onChangeModifyPostData : onChangePostDataText}
           name="content"
         />
       </WriteFormInputWrap>
-      <WriteFormSubmitButton onClick={onSubmitPostData}>
-        등록
+      <WriteFormSubmitButton
+        onClick={isModify ? onSubmitModifyPostData : onSubmitPostData}
+      >
+        {isModify ? "수정" : "등록"}
       </WriteFormSubmitButton>
     </>
   );
