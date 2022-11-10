@@ -38,13 +38,9 @@ const useComment = ({ lostFoundId }: Param) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([
-            "lostfound/getLostFound",
+            "lostFound/getLostFound",
             lostFoundId,
           ]);
-          window.alert("댓글 수정 성공");
-        },
-        onError: () => {
-          window.alert("댓글 수정 실패");
         },
       }
     );
@@ -60,13 +56,9 @@ const useComment = ({ lostFoundId }: Param) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([
-            "lostfound/getLostFound",
+            "lostFound/getLostFound",
             lostFoundId,
           ]);
-          window.alert("댓글 삭제 성공");
-        },
-        onError: () => {
-          window.alert("댓글 삭제 실패");
         },
       }
     );
@@ -86,14 +78,10 @@ const useComment = ({ lostFoundId }: Param) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([
-            "lostfound/getLostFound",
+            "lostFound/getLostFound",
             lostFoundId,
           ]);
-          window.alert("댓글 등록 성공");
           setComment("");
-        },
-        onError: () => {
-          window.alert("댓글 등록 실패");
         },
       }
     );

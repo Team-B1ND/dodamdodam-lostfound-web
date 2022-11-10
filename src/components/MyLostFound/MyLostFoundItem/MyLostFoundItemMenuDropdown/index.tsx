@@ -7,45 +7,30 @@ import {
 import { HiDotsVertical } from "@react-icons/all-files/hi/HiDotsVertical";
 import { memo, useRef, useState } from "react";
 import useOutsideClick from "../../../../hooks/common/useOutsideClick";
-import { useDeleteLostFound } from "../../../../quries/lostFound/lostFound.query";
-import { useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   lostFoundId: number;
-  onModify: () => void;
+  onDeleteLostFound: (lostFoundId: number) => void;
 }
 
 const MyLostFoundItemMenuDropdown = ({
   lostFoundId,
-  onModify,
+  onDeleteLostFound,
 }: Props) => {
   const [close, setClose] = useState(true);
   const menuDropdownContainer = useRef<HTMLDivElement>(null);
 
+  const navigate = useNavigate();
+
   useOutsideClick({ ref: menuDropdownContainer, setState: setClose });
-
-  const queryClient = useQueryClient();
-
-  const deleteLostFoundMutation = useDeleteLostFound();
-
-  const onDeleteMutation = () => {
-    deleteLostFoundMutation.mutateAsync(
-      { id: lostFoundId },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries("lostFound/getMyLostFounds");
-          window.alert("분실물 삭제 성공");
-        },
-        onError: () => {
-          window.alert("분실물 삭제 실패");
-        },
-      }
-    );
-  };
 
   return (
     <MyLostFoundItemMenuDropdownContainer
-      onClick={() => setClose((prev) => !prev)}
+      onClick={(e) => {
+        e.stopPropagation();
+        setClose((prev) => !prev);
+      }}
       ref={menuDropdownContainer}
     >
       <MyLostFoundItemMenuDropdownIcon>
@@ -53,10 +38,14 @@ const MyLostFoundItemMenuDropdown = ({
       </MyLostFoundItemMenuDropdownIcon>
       {!close && (
         <MyLostFoundItemMenuDropdownItemWrap>
-          <MyLostFoundItemMenuDropdownItem onClick={onModify}>
+          <MyLostFoundItemMenuDropdownItem
+            onClick={() => navigate(`/write/${lostFoundId}`)}
+          >
             수정
           </MyLostFoundItemMenuDropdownItem>
-          <MyLostFoundItemMenuDropdownItem onClick={onDeleteMutation}>
+          <MyLostFoundItemMenuDropdownItem
+            onClick={() => onDeleteLostFound(lostFoundId)}
+          >
             삭제
           </MyLostFoundItemMenuDropdownItem>
         </MyLostFoundItemMenuDropdownItemWrap>
