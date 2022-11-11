@@ -11,7 +11,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <BrowserRouter>
+        <BrowserRouter basename="/lostfound">
           <ThemeProviderContainer>
             <PageTemplate>
               <Router />

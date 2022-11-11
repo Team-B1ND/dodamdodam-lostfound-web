@@ -21,7 +21,7 @@ export const customAxiosErrorInterceptor = async (config: AxiosError) => {
     } catch (error) {
       window.alert("세션만료");
       token.clearToken();
-      window.location.href = "https://v6.dodam.b1nd.com/sign";
+      window.location.href = "https://dodam.b1nd.com/sign";
     }
   }
 };
