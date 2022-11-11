@@ -5,7 +5,6 @@ import {
   usePatchLostFoundComment,
   usePostLostFoundComment,
 } from "../../quries/lostFound/lostFound.query";
-import { useGetMyMember } from "../../quries/member/member.query";
 
 interface Param {
   lostFoundId: number;
@@ -14,7 +13,6 @@ interface Param {
 const useComment = ({ lostFoundId }: Param) => {
   const queryClient = useQueryClient();
   const [comment, setComment] = useState<string>("");
-  const { data } = useGetMyMember();
 
   const postLostFoundCommentMutation = usePostLostFoundComment();
   const patchLostFoundCommentMutation = usePatchLostFoundComment();
@@ -40,13 +38,9 @@ const useComment = ({ lostFoundId }: Param) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([
-            "lostfound/useGetLostFound",
+            "lostFound/getLostFound",
             lostFoundId,
           ]);
-          window.alert("댓글 수정 성공");
-        },
-        onError: () => {
-          window.alert("댓글 수정 실패");
         },
       }
     );
@@ -62,13 +56,9 @@ const useComment = ({ lostFoundId }: Param) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([
-            "lostfound/useGetLostFound",
+            "lostFound/getLostFound",
             lostFoundId,
           ]);
-          window.alert("댓글 삭제 성공");
-        },
-        onError: () => {
-          window.alert("댓글 삭제 실패");
         },
       }
     );
@@ -88,14 +78,10 @@ const useComment = ({ lostFoundId }: Param) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([
-            "lostfound/useGetLostFound",
+            "lostFound/getLostFound",
             lostFoundId,
           ]);
-          window.alert("댓글 등록 성공");
           setComment("");
-        },
-        onError: () => {
-          window.alert("댓글 등록 실패");
         },
       }
     );

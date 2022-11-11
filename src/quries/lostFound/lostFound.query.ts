@@ -5,8 +5,20 @@ import {
   patchLostFoundCommentParam,
   deleteLostFoundCommentParam,
   postLostFoundParam,
+  deleteLostFoundParam,
+  patchLostFoundParam,
 } from "../../repositories/lostFound/lostFound.param";
 import lostFoundRepository from "../../repositories/lostFound/lostFound.repository";
+
+export const useGetMyLostFounds = () =>
+  useQuery(
+    "lostFound/getMyLostFounds",
+    () => lostFoundRepository.getMyLostFounds(),
+    {
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  );
 
 export const useGetLostFoundsLostType = () =>
   useInfiniteQuery(
@@ -35,7 +47,7 @@ export const useGetLostFoundsFoundType = () =>
 
 export const useGetLostFound = ({ id }: getLostFoundParam) =>
   useQuery(
-    ["lostfound/useGetLostFound", id],
+    ["lostFound/getLostFound", id],
     () => lostFoundRepository.getLostFound({ id }),
     {
       enabled: !!id,
@@ -72,6 +84,21 @@ export const useDeleteLostFoundComment = () => {
 export const usePostLostFound = () => {
   const mutation = useMutation(({ data }: postLostFoundParam) =>
     lostFoundRepository.postLostFound({ data })
+  );
+  return mutation;
+};
+
+export const usePatchLostFound = () => {
+  const mutation = useMutation(({ data, lostFoundId }: patchLostFoundParam) =>
+    lostFoundRepository.patchLostFound({ data, lostFoundId })
+  );
+
+  return mutation;
+};
+
+export const useDeleteLostFound = () => {
+  const mutation = useMutation(({ id }: deleteLostFoundParam) =>
+    lostFoundRepository.deleteLostFound({ id })
   );
 
   return mutation;

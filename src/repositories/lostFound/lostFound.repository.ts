@@ -2,18 +2,26 @@ import customAxios from "../../lib/axios";
 import {
   LostFoundResponse,
   LostFoundsResponse,
+  MyLostFoundsResponse,
 } from "../../types/lostfound/lostfound.type";
 import {
   deleteLostFoundCommentParam,
+  deleteLostFoundParam,
   getLostFoundParam,
   getLostFoundsFoundTypeParam,
   getLostFoundsLostTypeParam,
   patchLostFoundCommentParam,
+  patchLostFoundParam,
   postLostFoundCommentParam,
   postLostFoundParam,
 } from "./lostFound.param";
 
 class LostFoundRepository {
+  public async getMyLostFounds(): Promise<MyLostFoundsResponse> {
+    const { data } = await customAxios.get("/lostfound/my");
+    return data;
+  }
+
   public async getLostFoundsLostType({
     page,
   }: getLostFoundsLostTypeParam): Promise<LostFoundsResponse> {
@@ -69,6 +77,17 @@ class LostFoundRepository {
 
   public async postLostFound({ data }: postLostFoundParam): Promise<void> {
     await customAxios.post("/lostfound", data);
+  }
+
+  public async patchLostFound({
+    data,
+    lostFoundId,
+  }: patchLostFoundParam): Promise<void> {
+    await customAxios.patch("/lostfound", { ...data, lostFoundId });
+  }
+
+  public async deleteLostFound({ id }: deleteLostFoundParam) {
+    await customAxios.delete(`/lostfound/${id}`);
   }
 }
 

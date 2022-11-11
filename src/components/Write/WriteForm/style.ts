@@ -59,6 +59,23 @@ export const WriteFormImg = styled.img`
   border-radius: 5px;
 `;
 
+export const WriteFormImgDeleteButton = styled.button`
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: ${palette.gray[300]};
+  border: 1px solid ${({ theme }) => theme.borderColor};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: ${({ theme }) => theme.contrast};
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+`;
+
 export const WriteFormTextInput = styled.input`
   width: 100%;
   height: 50px;

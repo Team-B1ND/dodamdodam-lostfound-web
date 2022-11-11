@@ -35,3 +35,7 @@ export interface LostFoundsResponse extends Response {
 export interface LostFoundResponse extends Response {
   data: LostFoundDetail;
 }
+
+export interface MyLostFoundsResponse extends Response {
+  data: LostFoundPreview[];
+}

@@ -12,27 +12,22 @@ import { HomeContainer, HomeLoadingItem, HomeWrap } from "./style";
 
 const Home = () => {
   const { ref, inView } = useInView();
-  const [lostFoundType, setLostFoundType] = useRecoilState(
-    homeLostFoundTypeAtom
-  );
+  const [lostFoundType] = useRecoilState(homeLostFoundTypeAtom);
 
   const homeLoadingItemArray = Array.from({ length: 12 });
 
   const {
     data: serverLostFoundFoundData,
-    isLoading: serverLostFoundFoundDataIsLoading,
     fetchNextPage: fetchLostFoundFoundNextPage,
   } = useGetLostFoundsFoundType();
 
   const {
     data: serverLostFoundLostData,
-    isLoading: serverLostFoundLostDataIsLoading,
     fetchNextPage: fetchLostFoundLostNextPage,
   } = useGetLostFoundsLostType();
 
   useEffect(() => {
     if (inView) {
-      console.log(lostFoundType);
       if (lostFoundType === "LOST") {
         fetchLostFoundLostNextPage();
       } else {
