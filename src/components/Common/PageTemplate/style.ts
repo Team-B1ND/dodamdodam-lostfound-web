@@ -11,14 +11,13 @@ export const PageTemplateContainer = styled.div`
 `;
 
 export const PageTemplateWrap = styled.div`
-  width: 80%;
   height: 100%;
   display: flex;
   align-items: center;
 `;
 
 export const PageTemplateContentWrap = styled.div`
-  width: 100%;
+  width: 966px;
   height: 100%;
   display: flex;
   flex-direction: column;
