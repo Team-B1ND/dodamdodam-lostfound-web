@@ -5,6 +5,7 @@ import { LostFoundApply } from "../../types/lostfound/lostfound.type";
 import { usePostLostFound as usePostLostFoundMutation } from "../../quries/lostFound/lostFound.query";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
+import { usePostModuleLog } from "../../quries/log/log.query";
 
 const usePostLostFound = () => {
   const queryClient = useQueryClient();
@@ -22,6 +23,7 @@ const usePostLostFound = () => {
   const [image, setImage] = useRecoilState(writeUploadLostFoundImageAtom);
 
   const postLostFoundMutation = usePostLostFoundMutation();
+  const postModuleLogMutation = usePostModuleLog();
 
   const onChangePostDataText = (
     e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -60,6 +62,10 @@ const usePostLostFound = () => {
           window.alert("분실물 등록 성공");
           queryClient.invalidateQueries("lostFound/getLostFoundsLostType");
           queryClient.invalidateQueries("lostFound/getLostFoundsFoundType");
+          postModuleLogMutation.mutate({
+            description: "분실물/습득물 등록",
+            moduleName: "분실물/습득물 등록",
+          });
           navigate("/");
           setPostData({
             content: "",
