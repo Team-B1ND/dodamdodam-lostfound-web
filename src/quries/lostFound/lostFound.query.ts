@@ -28,7 +28,7 @@ export const useGetLostFoundsLostType = () =>
 
     {
       cacheTime: 1000 * 60,
-      staleTime: 1000 * 60,
+      staleTime: 1000 * 60 * 60,
       getNextPageParam: (nextPage) => nextPage.nextPage,
     }
   );
@@ -40,7 +40,7 @@ export const useGetLostFoundsFoundType = () =>
       lostFoundRepository.getLostFoundsFoundType({ page: pageParam }),
     {
       cacheTime: 1000 * 60,
-      staleTime: 1000 * 60,
+      staleTime: 1000 * 60 * 60,
       getNextPageParam: (nextPage) => nextPage.nextPage,
     }
   );
