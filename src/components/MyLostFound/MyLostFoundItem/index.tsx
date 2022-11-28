@@ -16,6 +16,7 @@ import MyLostFoundItemMenuDropdown from "./MyLostFoundItemMenuDropdown";
 import { useNavigate } from "react-router-dom";
 import useDeleteLostFound from "../../../hooks/lostFound/useDeleteLostFound";
 import Spinner from "../../Common/Spinner/Spinner";
+import { usePostModuleLog } from "../../../quries/log/log.query";
 
 interface Props {
   data: LostFoundPreview;
@@ -25,11 +26,20 @@ const MyLostFoundItem = ({ data }: Props) => {
   const navigate = useNavigate();
 
   const { onDeleteLostFound, isDeleting } = useDeleteLostFound();
+  const postModuleLogMutation = usePostModuleLog();
+
+  const redirect = () => {
+    navigate(`/detail/${data.id}`);
+    postModuleLogMutation.mutate({
+      description: "분실물/습득물 단일 조회",
+      moduleName: "분실물/습득물 단일 조회",
+    });
+  };
 
   return (
     <>
       <Spinner isAbsolute isLoading={isDeleting} />
-      <MyLostFoundItemContainer onClick={() => navigate(`/detail/${data.id}`)}>
+      <MyLostFoundItemContainer onClick={redirect}>
         <MyLostFoundItemImg src={data.image || NoImage} />
         <MyLostFoundItemMiddleWrap>
           <MyLostFoundItemInfoWrap>

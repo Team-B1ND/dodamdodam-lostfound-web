@@ -3,6 +3,7 @@ import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import customAxios from "../../lib/axios";
+import { usePostModuleLog } from "../../quries/log/log.query";
 import { usePatchLostFound } from "../../quries/lostFound/lostFound.query";
 import { writeUploadLostFoundImageAtom } from "../../store/write/write.store";
 import { LostFoundApply } from "../../types/lostfound/lostfound.type";
@@ -35,6 +36,7 @@ const useModifyLostFound = ({ lostFoundId }: Param) => {
   const [image, setImage] = useRecoilState(writeUploadLostFoundImageAtom);
 
   const patchLostFoundMutation = usePatchLostFound();
+  const postModuleLogMutation = usePostModuleLog();
 
   useEffect(() => {
     if (lostFoundId) {
@@ -76,6 +78,10 @@ const useModifyLostFound = ({ lostFoundId }: Param) => {
         onSuccess: () => {
           window.alert("분실물 수정 성공");
           queryClient.invalidateQueries("lostFound/getMyLostFounds");
+          postModuleLogMutation.mutate({
+            description: "분실물/습득물 수정",
+            moduleName: "분실물/습득물 수정",
+          });
           navigate("/my");
           setImage("");
         },

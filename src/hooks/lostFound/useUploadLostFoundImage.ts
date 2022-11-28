@@ -1,5 +1,6 @@
 import { ChangeEvent, DragEvent, useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
+import { usePostModuleLog } from "../../quries/log/log.query";
 import { usePostUpload } from "../../quries/upload/upload.query";
 import { writeUploadLostFoundImageAtom } from "../../store/write/write.store";
 
@@ -7,6 +8,7 @@ const useUploadLostFoundImage = () => {
   const [, setImage] = useRecoilState(writeUploadLostFoundImageAtom);
   const [isDrag, setIsDrag] = useState(false);
   const postUploadMutation = usePostUpload();
+  const postModuleLogMutation = usePostModuleLog();
 
   const onChangeImage = useCallback(
     async (e: ChangeEvent<HTMLInputElement> | any) => {
@@ -25,6 +27,10 @@ const useUploadLostFoundImage = () => {
           onSuccess: (res) => {
             window.alert("이미지 업로드 성공");
             setImage(res.data);
+            postModuleLogMutation.mutate({
+              description: "분실물/습득물 사진 업로드",
+              moduleName: "분실물/습득물 사진 업로드",
+            });
           },
           onError: () => {
             window.alert("이미지 업로드 실패");
