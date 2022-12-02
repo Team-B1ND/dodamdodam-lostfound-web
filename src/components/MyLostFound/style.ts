@@ -12,6 +12,10 @@ export const MyLostFoundContainer = styled.div`
   box-sizing: border-box;
   padding-top: 54px;
   overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const MyLostFoundEmptyWrap = styled.div`

@@ -18,7 +18,10 @@ const NavBar = () => {
 
   return (
     <NavBarContainer>
-      <NavBarLogo src={Logo} />
+      <NavBarLogo
+        src={Logo}
+        onClick={() => (window.location.href = "http://dodam.b1nd.com/")}
+      />
       <NavBarProfileWrap>
         {!serverMyMemberIsLoading && serverMyMemberData && (
           <>

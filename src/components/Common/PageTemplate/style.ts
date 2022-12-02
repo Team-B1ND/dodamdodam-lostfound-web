@@ -25,4 +25,8 @@ export const PageTemplateContentWrap = styled.div`
   padding: 30px 0px;
   box-sizing: border-box;
   overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;

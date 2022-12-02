@@ -19,6 +19,10 @@ export const HomeWrap = styled.div`
   flex-wrap: wrap;
   row-gap: 20px;
   column-gap: 20px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const HomeLoadingItem = styled.div`
