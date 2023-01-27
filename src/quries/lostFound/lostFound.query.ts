@@ -17,6 +17,7 @@ export const useGetMyLostFounds = () =>
     {
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
+      //suspense: true,
     }
   );
 
@@ -30,6 +31,7 @@ export const useGetLostFoundsLostType = () =>
       cacheTime: 1000 * 60,
       staleTime: 1000 * 60 * 60,
       getNextPageParam: (nextPage) => nextPage.nextPage,
+      //suspense: true,
     }
   );
 
@@ -42,6 +44,7 @@ export const useGetLostFoundsFoundType = () =>
       cacheTime: 1000 * 60,
       staleTime: 1000 * 60 * 60,
       getNextPageParam: (nextPage) => nextPage.nextPage,
+      //suspense: true,
     }
   );
 
@@ -50,9 +53,10 @@ export const useGetLostFound = ({ id }: getLostFoundParam) =>
     ["lostFound/getLostFound", id],
     () => lostFoundRepository.getLostFound({ id }),
     {
-      enabled: !!id,
+      enabled: !!id,//true가 되면 lostFoundRepository를 실행
       cacheTime: 1000 * 60,
       staleTime: 1000 * 60,
+      //suspense: true,
     }
   );
 

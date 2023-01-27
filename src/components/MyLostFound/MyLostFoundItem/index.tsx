@@ -27,7 +27,6 @@ const MyLostFoundItem = ({ data }: Props) => {
 
   const { onDeleteLostFound, isDeleting } = useDeleteLostFound();
   const postModuleLogMutation = usePostModuleLog();
-
   const redirect = () => {
     navigate(`/detail/${data.id}`);
     postModuleLogMutation.mutate({

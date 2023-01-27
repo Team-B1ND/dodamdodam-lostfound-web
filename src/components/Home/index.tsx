@@ -1,3 +1,4 @@
+//메인화면
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useRecoilState } from "recoil";

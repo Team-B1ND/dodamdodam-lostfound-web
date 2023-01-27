@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+import React,{ ReactNode, Suspense } from "react";
+import ErrorBoundary from "../../../ErrorBoundary/ErrorBoundary";
+import { useGetMyMember } from "../../../quries/member/member.query";
 import DarkModeButton from "../DarkmodeButton";
 import NavBar from "../NavBar";
 import {
@@ -15,10 +17,10 @@ const PageTemplate = ({ children }: Props) => {
   return (
     <PageTemplateContainer>
       <PageTemplateWrap>
-        <NavBar />
+        <NavBar/>
         <PageTemplateContentWrap>{children}</PageTemplateContentWrap>
         <DarkModeButton />
-      </PageTemplateWrap>
+        </PageTemplateWrap>
     </PageTemplateContainer>
   );
 };

@@ -14,7 +14,7 @@ const MyLostFound = () => {
     isLoading: serverMyLostFoundDataIsLoading,
   } = useGetMyLostFounds();
 
-  const loadingItemArray = Array.from({ length: 6 });
+  const loadingItemArray = Array.from({ length: 6 });//배열 6칸짜리 생성
 
   return (
     <MyLostFoundContainer>
