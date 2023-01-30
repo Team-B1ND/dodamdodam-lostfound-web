@@ -24,6 +24,10 @@ import DefaultProfileImage from "../../assets/image/common/defaultProfile.png";
 import TimeCounting from "time-counting";
 import DetailComment from "./DetailComment";
 import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
+import { ErrorBoundary } from "react-error-boundary";
+import { Suspense } from "react";
+import Spinner from "../Common/Spinner/Spinner";
+import NoData from "../Common/NoData";
 const Detail = () => {
   const { lostfoundid } = useParams();
 
@@ -34,54 +38,58 @@ const Detail = () => {
 
   return (
     <DetailContainer>
-      {(
-        <DetailWrap>
-          <DetailImg src={serverLostFoundDetailData?.data.image || NoImage} />
-          <DetailProfileWrap>
-            <DetailProfileInfoWrap>
-              <DetailProfileImg
-                src={ 
-                  serverLostFoundDetailData?.data.member.profileImage ||
-                  DefaultProfileImage
-                }
-              />
-              <DetailProfileTextWrap>
-                <DetailProfileName>
-                  {serverLostFoundDetailData?.data.member.name}
-                </DetailProfileName>
-              </DetailProfileTextWrap>
-            </DetailProfileInfoWrap>
-            <DetailPlaceWrap>
-              <DetailPlaceText>
-                {serverLostFoundDetailData?.data.place}
-              </DetailPlaceText>
-              <DetailPlaceIcon>
-                <FaMapMarkerAlt />
-              </DetailPlaceIcon>
-            </DetailPlaceWrap>
-          </DetailProfileWrap>
-          <DetailContentWrap>
-            <DetailContentTitle>
-              {serverLostFoundDetailData?.data.title}
-            </DetailContentTitle>
-            <DetailContentCreatedAt>
-              {TimeCounting(serverLostFoundDetailData?.data.createAt!, {
-                lang: "ko",
-              })}
-            </DetailContentCreatedAt>
-            <DetailContent>
-              {serverLostFoundDetailData?.data.content}
-            </DetailContent>
-            <DetailBottomText>
-              {`댓글 ∙ ${serverLostFoundDetailData?.data.comment.length}`}
-            </DetailBottomText>
-          </DetailContentWrap>
-          <DetailComment
-            lostFoundId={Number(lostfoundid)}
-            data={serverLostFoundDetailData?.data.comment!}
-          />
-        </DetailWrap>
-      )}
+      <ErrorBoundary fallback={<NoData/>}>
+        <Suspense fallback={<Spinner isLoading isAbsolute={true}/>}>
+          {(
+            <DetailWrap>
+            <DetailImg src={serverLostFoundDetailData?.data.image || NoImage} />
+            <DetailProfileWrap>
+              <DetailProfileInfoWrap>
+                <DetailProfileImg
+                  src={ 
+                    serverLostFoundDetailData?.data.member.profileImage ||
+                    DefaultProfileImage
+                  }
+                />
+                <DetailProfileTextWrap>
+                  <DetailProfileName>
+                    {serverLostFoundDetailData?.data.member.name}
+                  </DetailProfileName>
+                </DetailProfileTextWrap>
+              </DetailProfileInfoWrap>
+              <DetailPlaceWrap>
+                <DetailPlaceText>
+                  {serverLostFoundDetailData?.data.place}
+                </DetailPlaceText>
+                <DetailPlaceIcon>
+                  <FaMapMarkerAlt />
+                </DetailPlaceIcon>
+              </DetailPlaceWrap>
+            </DetailProfileWrap>
+            <DetailContentWrap>
+              <DetailContentTitle>
+                {serverLostFoundDetailData?.data.title}
+              </DetailContentTitle>
+              <DetailContentCreatedAt>
+                {TimeCounting(serverLostFoundDetailData?.data.createAt!, {
+                  lang: "ko",
+                })}
+              </DetailContentCreatedAt>
+              <DetailContent>
+                {serverLostFoundDetailData?.data.content}
+              </DetailContent>
+              <DetailBottomText>
+                {`댓글 ∙ ${serverLostFoundDetailData?.data.comment.length}`}
+              </DetailBottomText>
+            </DetailContentWrap>
+            <DetailComment
+              lostFoundId={Number(lostfoundid)}
+              data={serverLostFoundDetailData?.data.comment!}
+            />
+          </DetailWrap>
+        )}
+      </Suspense>
+      </ErrorBoundary>
     </DetailContainer>
   );
 };
