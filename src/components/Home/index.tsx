@@ -43,10 +43,10 @@ const Home = () => {
       <HomeWrap>
         {(() => {
           return lostFoundType === "LOST"
-            ? serverLostFoundLostData
-            : serverLostFoundFoundData;
-        })()?.pages?.map((page) =>
-          page.data.map((item) => <HomeItem data={item} key={item.id} />)
+          ? serverLostFoundLostData
+          : serverLostFoundFoundData;
+          })()?.pages?.map((page) =>
+            page.data.map((item) => <HomeItem data={item} key={item.id} />)
         )}
         {homeLoadingItemArray.map((item, idx) => (
           <HomeLoadingItem key={idx} ref={ref} />
