@@ -3,6 +3,8 @@ import ErrorBoundary from "../../../ErrorBoundary/ErrorBoundary";
 import { useGetMyMember } from "../../../quries/member/member.query";
 import DarkModeButton from "../DarkmodeButton";
 import NavBar from "../NavBar";
+import NoData from "../NoData";
+import Spinner from "../Spinner/Spinner";
 import {
   PageTemplateContainer,
   PageTemplateContentWrap,
@@ -12,16 +14,19 @@ import {
 interface Props {
   children: ReactNode;
 }
-
 const PageTemplate = ({ children }: Props) => {
   return (
-    <PageTemplateContainer>
-      <PageTemplateWrap>
-        <NavBar/>
-        <PageTemplateContentWrap>{children}</PageTemplateContentWrap>
-        <DarkModeButton />
-        </PageTemplateWrap>
-    </PageTemplateContainer>
+    <ErrorBoundary fallback={<NoData/>}>
+      <Suspense fallback={<Spinner isLoading={true} isAbsolute={true}/>}>
+        <PageTemplateContainer>
+          <PageTemplateWrap>
+            <NavBar/>
+            <PageTemplateContentWrap>{children}</PageTemplateContentWrap>
+            <DarkModeButton />
+          </PageTemplateWrap>
+        </PageTemplateContainer>
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
