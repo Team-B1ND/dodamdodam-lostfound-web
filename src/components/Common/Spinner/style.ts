@@ -13,15 +13,16 @@ export const SpinnerContainer = styled.div<{ isAbsolute?: boolean }>`
   ${({ isAbsolute }) =>
     isAbsolute &&
     css`
-      position: absolute;
-      top: 50%;
+      position: fixed;
+      /* position: absolute; */
+      top:50%;
       left: 50%;
       transform: translate(-50%, -50%);
     `};
 `;
 
 const SpinnerSpin = keyframes`
-    to {
+  to {
     -webkit-transform: rotate(360deg);
   }
 `;
