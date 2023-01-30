@@ -1,25 +1,15 @@
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import PageTemplate from "./components/Common/PageTemplate";
+import Spinner from "./components/Common/Spinner/Spinner";
 import ThemeProviderContainer from "./components/Common/ThemeProviderContainer";
 import Router from "./components/Router/Router";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 import useTokenCheck from "./hooks/auth/useTokenCheck";
-
 function App() {
   const queryClient = new QueryClient();
-  //전역선언
-  // const queryClientRef = useRef<QueryClient>();
-  // if (!queryClientRef.current) {
-  //   queryClientRef.current = new QueryClient({
-  //     defaultOptions: {
-  //       queries: {
-  //         suspense: true,
-  //       },
-  //     },
-  //   });
-  // }
   useTokenCheck();
 
   return (
