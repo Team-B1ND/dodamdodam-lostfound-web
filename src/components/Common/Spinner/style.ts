@@ -13,8 +13,7 @@ export const SpinnerContainer = styled.div<{ isAbsolute?: boolean }>`
   ${({ isAbsolute }) =>
     isAbsolute &&
     css`
-      position: fixed;
-      /* position: absolute; */
+      position: absolute;
       top:50%;
       left: 50%;
       transform: translate(-50%, -50%);
