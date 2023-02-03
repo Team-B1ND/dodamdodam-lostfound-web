@@ -1,56 +1,23 @@
 //메인화면
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { useRecoilState } from "recoil";
-import {
-  useGetLostFoundsFoundType,
-  useGetLostFoundsLostType,
-} from "../../quries/lostFound/lostFound.query";
-import { homeLostFoundTypeAtom } from "../../store/home/home.store";
+import { Suspense } from "react";
+import HomeList from './HomeList';
 import HomeDropdown from "./HomeDropdown";
-import HomeItem from "./HomeItem";
-import { HomeContainer, HomeLoadingItem, HomeWrap } from "./style";
+import { HomeContainer, HomeWrap } from "./style";
+import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
+import Spinner from "../Common/Spinner/Spinner";
+import NoData from "../Common/NoData";
 
 const Home = () => {
-  const { ref, inView } = useInView();
-  const [lostFoundType] = useRecoilState(homeLostFoundTypeAtom);
-
-  const homeLoadingItemArray = Array.from({ length: 12 });
-
-  const {
-    data: serverLostFoundFoundData,
-    fetchNextPage: fetchLostFoundFoundNextPage,
-  } = useGetLostFoundsFoundType();
-
-  const {
-    data: serverLostFoundLostData,
-    fetchNextPage: fetchLostFoundLostNextPage,
-  } = useGetLostFoundsLostType();
-
-  useEffect(() => {
-    if (inView) {
-      if (lostFoundType === "LOST") {
-        fetchLostFoundLostNextPage();
-      } else {
-        fetchLostFoundFoundNextPage();
-      }
-    }
-  }, [inView, lostFoundType]);
-
   return (
     <HomeContainer>
       <HomeDropdown />
       <HomeWrap>
-        {(() => {
-          return lostFoundType === "LOST"
-          ? serverLostFoundLostData
-          : serverLostFoundFoundData;
-          })()?.pages?.map((page) =>
-            page.data.map((item) => <HomeItem data={item} key={item.id} />)
-        )}
-        {homeLoadingItemArray.map((item, idx) => (
-          <HomeLoadingItem key={idx} ref={ref} />
-        ))}
+        {/* 서스펜스 태그로 감싸고 밑부분 컴포넌트로 만들기 */}
+        <ErrorBoundary fallback={<NoData/>}>
+          <Suspense fallback={<h1>loading..</h1>}>
+            <HomeList/>
+          </Suspense>
+        </ErrorBoundary>
       </HomeWrap>
     </HomeContainer>
   );
