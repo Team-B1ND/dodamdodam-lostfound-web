@@ -41,8 +41,6 @@ const DetailCommentItem = ({
     setComment(tempComment);
   };
   return (
-    <ErrorBoundary fallback={<NoData/>}>
-      <Suspense fallback={<Spinner isLoading isAbsolute={true}/>}>
         <DetailCommentItemContainer>
           <DetailCommentItemProfileWrap>
             <DetailCommentItemProfileImg src={data.member?.profileImage || DefaultProfileImage}/>
@@ -85,8 +83,6 @@ const DetailCommentItem = ({
           </DetailCommentMenuWrap>
         )}
         </DetailCommentItemContainer>
-      </Suspense>
-    </ErrorBoundary>
   );
 };
 
