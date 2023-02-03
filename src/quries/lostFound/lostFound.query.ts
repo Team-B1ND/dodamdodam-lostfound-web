@@ -15,7 +15,7 @@ export const useGetMyLostFounds = () =>
     "lostFound/getMyLostFounds",
     () => lostFoundRepository.getMyLostFounds(),
     {
-      suspense: true,
+      suspense:true,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
     }
@@ -41,7 +41,7 @@ export const useGetLostFoundsFoundType = () =>
     ({ pageParam = 1 }) =>
       lostFoundRepository.getLostFoundsFoundType({ page: pageParam }),
     {
-      suspense: true,
+      suspense:true,
       cacheTime: 1000 * 60,
       staleTime: 1000 * 60 * 60,
       getNextPageParam: (nextPage) => nextPage.nextPage,
