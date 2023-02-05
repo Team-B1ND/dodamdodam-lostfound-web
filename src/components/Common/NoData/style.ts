@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const NoDataContainer = styled.div`
-
-`;
-
 export const NoFound = styled.h1`
     font-size: 25px;
     text-align: center;
