@@ -1,4 +1,12 @@
-import { useInfiniteQuery, useMutation, useQuery } from "react-query";
+import { AxiosError } from "axios";
+import { useInfiniteQuery, 
+  useMutation, 
+  useQuery, 
+  UseQueryOptions, 
+  UseQueryResult,
+  UseInfiniteQueryOptions, 
+  UseInfiniteQueryResult,
+} from "react-query";
 import {
   getLostFoundParam,
   postLostFoundCommentParam,
@@ -8,52 +16,80 @@ import {
   deleteLostFoundParam,
   patchLostFoundParam,
 } from "../../repositories/lostFound/lostFound.param";
+import { LostFoundResponse,MyLostFoundsResponse,LostFoundsResponse } from "../../types/lostfound/lostfound.type";
 import lostFoundRepository from "../../repositories/lostFound/lostFound.repository";
 
-export const useGetMyLostFounds = () =>
-  useQuery(
+export const useGetMyLostFounds = (
+  options?: UseQueryOptions<
+  MyLostFoundsResponse,
+  AxiosError,
+  MyLostFoundsResponse,
+  "lostFound/getMyLostFounds"
+  >):UseQueryResult<MyLostFoundsResponse, AxiosError> =>useQuery(
     "lostFound/getMyLostFounds",
     () => lostFoundRepository.getMyLostFounds(),
     {
-      suspense:true,
+      ...options,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
     }
   );
 
-export const useGetLostFoundsLostType = () =>
+export const useGetLostFoundsLostType = (
+  options?: UseInfiniteQueryOptions<
+  LostFoundsResponse,
+  AxiosError,
+  LostFoundsResponse,
+  LostFoundsResponse,
+  "lostFound/getLostFoundsLostType"
+>
+):UseInfiniteQueryResult<LostFoundsResponse,AxiosError>=>
   useInfiniteQuery(
     "lostFound/getLostFoundsLostType",
     ({ pageParam = 1 }) =>
       lostFoundRepository.getLostFoundsLostType({ page: pageParam }),
-
     {
-      suspense: true,
+      ...options,
       cacheTime: 1000 * 60,
       staleTime: 1000 * 60 * 60,
       getNextPageParam: (nextPage) => nextPage.nextPage,
     }
   );
 
-export const useGetLostFoundsFoundType = () =>
+export const useGetLostFoundsFoundType = (
+  options?: UseInfiniteQueryOptions<
+  LostFoundsResponse,
+  AxiosError,
+  LostFoundsResponse,
+  LostFoundsResponse,
+  "lostFound/getLostFoundsFoundType"
+>
+):UseInfiniteQueryResult<LostFoundsResponse,AxiosError> =>
   useInfiniteQuery(
     "lostFound/getLostFoundsFoundType",
     ({ pageParam = 1 }) =>
       lostFoundRepository.getLostFoundsFoundType({ page: pageParam }),
     {
-      suspense:true,
+      ...options,
       cacheTime: 1000 * 60,
       staleTime: 1000 * 60 * 60,
       getNextPageParam: (nextPage) => nextPage.nextPage,
     }
   );
 
-export const useGetLostFound = ({ id }: getLostFoundParam) =>
+export const useGetLostFound = (
+  { id }: getLostFoundParam, 
+  options?: UseQueryOptions<
+  LostFoundResponse,
+  AxiosError,
+  LostFoundResponse,
+  ["lostFound/getLostFound", number]
+>):UseQueryResult<LostFoundResponse, AxiosError> =>
   useQuery(
     ["lostFound/getLostFound", id],
     () => lostFoundRepository.getLostFound({ id }),
     {
-      suspense: true,
+      ...options,
       enabled: !!id,//true가 되면 lostFoundRepository를 실행
       cacheTime: 1000 * 60,
       staleTime: 1000 * 60,
