@@ -2,26 +2,28 @@ import { useGetMyLostFounds } from "../.././.././quries/lostFound/lostFound.quer
 import {
     MyLostFoundEmptyIcon,
     MyLostFoundEmptyWrap,
-    MyLostFoundLoadingItem,
 } from "../style";
 import { AiOutlineFolderOpen } from "@react-icons/all-files/ai/AiOutlineFolderOpen";
 import MyLostFoundItem from "../MyLostFoundItem";
-
+import FallbackSkeleton from "../../Common/FallbackSkeleton";
+import { useQueryClient } from "react-query";
 export default function MyLostFoundDetail(){
+    const queryClient = useQueryClient();
+    
+    queryClient.invalidateQueries({
+        queryKey: "lostFound/getMyLostFounds",
+        exact: true,
+    })
     const {
         data: serverMyLostFoundData,
         isLoading: serverMyLostFoundDataIsLoading,
-    } = useGetMyLostFounds();
-    
-    const loadingItemArray = Array.from({ length: 6 });//배열 6칸짜리 생성
+    } = useGetMyLostFounds({suspense: true});
 
     return(
         <>
             {serverMyLostFoundDataIsLoading ? (
                 <>
-                    {loadingItemArray.map((item, idx) => (
-                        <MyLostFoundLoadingItem key={idx} />
-                    ))}
+                    <FallbackSkeleton/>
                 </>
                 ) : (
                 <>
