@@ -2,7 +2,7 @@
 import { useParams } from "react-router-dom";
 import { DetailContainer } from "./style";
 import DetailMore from "./DetailMore";
-import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
+import ErrorBoundary from "../Common/ErrorBoundary/ErrorBoundary";
 import { Suspense } from "react";
 import NoData from "../Common/NoData";
 
@@ -10,7 +10,7 @@ const Detail = () => {
   const { lostfoundid } = useParams();
   return (
     <DetailContainer>
-      <ErrorBoundary fallback={<NoData/>}>
+      <ErrorBoundary fallback={<h1 style={{ fontSize: "20px" }}>Error :( </h1>}>
         <Suspense fallback={<>Loading...</>}>
           <DetailMore lostfoundid={lostfoundid}/>
         </Suspense>
