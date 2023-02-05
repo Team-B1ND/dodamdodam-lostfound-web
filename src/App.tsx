@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
@@ -13,7 +12,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <BrowserRouter> {/*basename="/lostfound"*/}
+        <BrowserRouter basename="/lostfound"> {/*basename="/lostfound"*/}
           <ThemeProviderContainer>
             <PageTemplate>
               <Router />
