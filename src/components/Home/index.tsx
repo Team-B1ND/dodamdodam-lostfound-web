@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import HomeList from './HomeList';
 import HomeDropdown from "./HomeDropdown";
 import { HomeContainer, HomeWrap } from "./style";
-import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
-import Spinner from "../Common/Spinner/Spinner";
+import ErrorBoundary from "../Common/ErrorBoundary/ErrorBoundary";
+import HomeFallbackSkeleton from "./HomeFallbackSkeleton";
 import NoData from "../Common/NoData";
 
 const Home = () => {
@@ -12,9 +12,8 @@ const Home = () => {
     <HomeContainer>
       <HomeDropdown />
       <HomeWrap>
-        {/* 서스펜스 태그로 감싸고 밑부분 컴포넌트로 만들기 */}
-        <ErrorBoundary fallback={<NoData/>}>
-          <Suspense fallback={<h1>loading..</h1>}>
+        <ErrorBoundary fallback={<h1 style={{ fontSize: "20px" }}>Error :( </h1>}>
+          <Suspense fallback={<HomeFallbackSkeleton/>}>
             <HomeList/>
           </Suspense>
         </ErrorBoundary>
