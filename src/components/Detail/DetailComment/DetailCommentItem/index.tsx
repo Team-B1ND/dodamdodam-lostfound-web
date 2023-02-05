@@ -14,11 +14,8 @@ import {
 import DefaultProfileImage from "../../../../assets/image/common/defaultProfile.png";
 import DetailCommentMenuDropdown from "./DetailCommentMenuDropdown";
 import { useGetMyMember } from "../../../../quries/member/member.query";
-import { FormEvent, memo, Suspense, useState } from "react";
+import { FormEvent, memo, useState } from "react";
 import { AiFillCloseCircle } from "@react-icons/all-files/ai/AiFillCloseCircle";
-import ErrorBoundary from "../../../../ErrorBoundary/ErrorBoundary";
-import Spinner from "../../../Common/Spinner/Spinner";
-import NoData from "../../../Common/NoData";
 
 interface Props {
   data: LostFoundComment;
