@@ -5,18 +5,13 @@ import TimeCounting from "time-counting";
 import DetailComment from "../DetailComment";
 import { FaMapMarkerAlt } from "@react-icons/all-files/fa/FaMapMarkerAlt";
 import { useGetLostFound } from "../.././../quries/lostFound/lostFound.query";
-import { useQueryClient } from "react-query";
+
 export default function DetailMore({lostfoundid}:{lostfoundid:string|undefined}){
-    const queryClient = useQueryClient();
-    
-    queryClient.invalidateQueries({
-        queryKey: ["lostFound/getLostFound"],
-        exact: true,
-    })
     const {
         data: serverLostFoundDetailData,
         //isLoading: serverLostFoundDetailDataIsLoading,
     } = useGetLostFound({ id: Number(lostfoundid)},{suspense:true});
+
     return(
         <>
             {(

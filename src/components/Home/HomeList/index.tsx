@@ -8,25 +8,15 @@ import {
 } from ".././../.././quries/lostFound/lostFound.query";
 import { homeLostFoundTypeAtom } from "../../../store/home/home.store";
 import HomeItem from "../HomeItem";
-import { HomeLoadingItem } from "../style";
-import { useQueryClient } from "react-query";
+import { HomeLoadingItem ,HomeWrap} from "../style";
 
 
 export default function HomeList(){
-    const queryClient = useQueryClient();
     const { ref, inView } = useInView();
     const [lostFoundType] = useRecoilState(homeLostFoundTypeAtom);
 
     const homeLoadingItemArray = Array.from({ length: 12 });
 
-    queryClient.invalidateQueries({
-        queryKey: "lostFound/getLostFoundsLostType",
-        exact: true,
-    });
-    queryClient.invalidateQueries({
-        queryKey: "lostFound/getLostFoundsFoundType",
-        exact: true,
-    });
     const {
         data: serverLostFoundFoundData,
         fetchNextPage: fetchLostFoundFoundNextPage,

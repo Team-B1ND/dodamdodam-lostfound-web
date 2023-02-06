@@ -6,14 +6,8 @@ import {
 import { AiOutlineFolderOpen } from "@react-icons/all-files/ai/AiOutlineFolderOpen";
 import MyLostFoundItem from "../MyLostFoundItem";
 import FallbackSkeleton from "../../Common/FallbackSkeleton";
-import { useQueryClient } from "react-query";
 export default function MyLostFoundDetail(){
-    const queryClient = useQueryClient();
     
-    queryClient.invalidateQueries({
-        queryKey: "lostFound/getMyLostFounds",
-        exact: true,
-    })
     const {
         data: serverMyLostFoundData,
         isLoading: serverMyLostFoundDataIsLoading,
