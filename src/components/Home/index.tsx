@@ -6,18 +6,19 @@ import { HomeContainer, HomeWrap } from "./style";
 import ErrorBoundary from "../Common/ErrorBoundary/ErrorBoundary";
 import HomeFallbackSkeleton from "./HomeFallbackSkeleton";
 import NoData from "../Common/NoData";
-
 const Home = () => {
+  const arr:string[]= ["lostFound/getLostFoundsLostType","lostFound/getLostFoundsFoundType"];
+  
   return (
     <HomeContainer>
       <HomeDropdown />
-      <HomeWrap>
-        <ErrorBoundary fallback={<h1 style={{ fontSize: "20px" }}>Error :( </h1>}>
-          <Suspense fallback={<HomeFallbackSkeleton/>}>
-            <HomeList/>
-          </Suspense>
-        </ErrorBoundary>
-      </HomeWrap>
+        <HomeWrap>
+          <ErrorBoundary fallback={<NoData invalidate={arr}/>}>
+            <Suspense fallback={<HomeFallbackSkeleton/>}>
+              <HomeList/>
+            </Suspense>
+          </ErrorBoundary>
+        </HomeWrap>
     </HomeContainer>
   );
 };

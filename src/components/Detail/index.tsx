@@ -10,7 +10,7 @@ const Detail = () => {
   const { lostfoundid } = useParams();
   return (
     <DetailContainer>
-      <ErrorBoundary fallback={<h1 style={{ fontSize: "20px" }}>Error :( </h1>}>
+      <ErrorBoundary fallback={<NoData invalidate={["lostFound/getLostFound"]}/>}>
         <Suspense fallback={<>Loading...</>}>
           <DetailMore lostfoundid={lostfoundid}/>
         </Suspense>
