@@ -1,15 +1,26 @@
 import * as S from "./style";
-export default function NoData(){
+import { useQueryClient } from "react-query";
+import { useState } from "react";
 
-    const Retry = () => {
-        window.location.reload();
+export default function NoData({invalidate}:{invalidate:string[] | string}){
+    const queryClient = useQueryClient();
+    const [fetch,SetFetch] = useState<boolean|null>(false);
+    //console.log(invalidate);
+    function Retry(){
+        SetFetch(true);
+        if(Array.isArray(invalidate)) {
+            invalidate.map((key) => queryClient.invalidateQueries(key));
+        }  
+        else {
+            queryClient.invalidateQueries(invalidate);
+        }
     }
     return(
-        <>
-            <S.NoFound>데이터를 불러오지 못했습니다!</S.NoFound>
+        <div>
+            <S.NoFound>{ fetch ? <>fetching...</> : <>Error :(</> }</S.NoFound>
             <S.RetryBtnContainer>
                 <S.RetryBtn onClick={Retry}>다시 시도하기</S.RetryBtn>
             </S.RetryBtnContainer>
-        </>
+        </div>
     );
 }
