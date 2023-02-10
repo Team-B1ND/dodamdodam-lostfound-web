@@ -39,12 +39,3 @@ export const MyLostFoundEmptyIcon = styled.div`
   justify-content: center;
   color: ${palette.gray[300]};
 `;
-
-// export const MyLostFoundLoadingItem = styled.div`
-//   width: 100%;
-//   min-height: 146px;
-//   max-height: 146px;
-//   border-radius: 5px;
-
-//   ${skeletonAnimtaion}
-// `;

@@ -9,7 +9,6 @@ import { useGetLostFound } from "../.././../quries/lostFound/lostFound.query";
 export default function DetailMore({lostfoundid}:{lostfoundid:string|undefined}){
     const {
         data: serverLostFoundDetailData,
-        //isLoading: serverLostFoundDetailDataIsLoading,
     } = useGetLostFound({ id: Number(lostfoundid)},{suspense:true});
 
     return(

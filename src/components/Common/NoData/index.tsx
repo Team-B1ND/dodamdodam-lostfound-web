@@ -2,10 +2,14 @@ import * as S from "./style";
 import { useQueryClient } from "react-query";
 import { useState } from "react";
 
-export default function NoData({invalidate}:{invalidate:string[] | string}){
+interface invalidateProps{
+    invalidate:string[]|string;
+}
+
+export default function NoData({invalidate}:invalidateProps){
     const queryClient = useQueryClient();
     const [fetch,SetFetch] = useState<boolean|null>(false);
-    //console.log(invalidate);
+
     function Retry(){
         SetFetch(true);
         if(Array.isArray(invalidate)) {
