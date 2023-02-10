@@ -5,12 +5,10 @@ import PageTemplate from "./components/Common/PageTemplate";
 import ThemeProviderContainer from "./components/Common/ThemeProviderContainer";
 import Router from "./components/Router/Router";
 import useTokenCheck from "./hooks/auth/useTokenCheck";
-
 function App() {
   const queryClient = new QueryClient();
-
   useTokenCheck();
-
+  
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>

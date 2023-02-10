@@ -37,42 +37,37 @@ const DetailCommentItem = ({
     setIsModify(false);
     setComment(tempComment);
   };
-
   return (
-    <DetailCommentItemContainer>
-      <DetailCommentItemProfileWrap>
-        <DetailCommentItemProfileImg
-          src={data.member?.profileImage || DefaultProfileImage}
-        />
-      </DetailCommentItemProfileWrap>
-
-      <DetailCommentItemTextWrap>
-        <DetailCommentItemProfileName>
-          {data.member?.name}
-        </DetailCommentItemProfileName>
-        {isModify ? (
-          <DetailCommentItemInputForm
-            onSubmit={(e) => {
-              onModifyComment(e, comment, data.id);
-              setIsModify(false);
-            }}
-          >
-            <DetailCommentItemInput
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.code === "Escape") {
-                  onCloseInput();
-                }
-              }}
-            />
-            <DetailCommentItemInputCloseButton onClick={onCloseInput}>
-              <AiFillCloseCircle />
-            </DetailCommentItemInputCloseButton>
-          </DetailCommentItemInputForm>
-        ) : (
-          <DetailCommentItemText>{data.comment}</DetailCommentItemText>
-        )}
+        <DetailCommentItemContainer>
+          <DetailCommentItemProfileWrap>
+            <DetailCommentItemProfileImg src={data.member?.profileImage || DefaultProfileImage}/>
+          </DetailCommentItemProfileWrap>
+        <DetailCommentItemTextWrap>
+          <DetailCommentItemProfileName>
+            {data.member?.name}
+          </DetailCommentItemProfileName>
+          {isModify ? (
+            <DetailCommentItemInputForm
+              onSubmit={(e) => {
+                onModifyComment(e, comment, data.id);
+                setIsModify(false);
+              }}>
+              <DetailCommentItemInput
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.code === "Escape") {
+                    onCloseInput();
+                  }
+                }}
+              />
+              <DetailCommentItemInputCloseButton onClick={onCloseInput}>
+                <AiFillCloseCircle />
+              </DetailCommentItemInputCloseButton>
+            </DetailCommentItemInputForm>
+            ) : (
+            <DetailCommentItemText>{data.comment}</DetailCommentItemText>
+          )}
       </DetailCommentItemTextWrap>
       {String(data.member.id) === String(serverMyMemberData?.data.member.id) &&
         !isModify && (
@@ -84,7 +79,7 @@ const DetailCommentItem = ({
             />
           </DetailCommentMenuWrap>
         )}
-    </DetailCommentItemContainer>
+        </DetailCommentItemContainer>
   );
 };
 

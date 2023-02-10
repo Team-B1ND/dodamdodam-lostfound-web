@@ -1,7 +1,7 @@
 import Detail from "../components/Detail";
-
+import React from "react";
 const DetailPage = () => {
-  return <Detail />;
+  return <Detail />
 };
 
 export default DetailPage;

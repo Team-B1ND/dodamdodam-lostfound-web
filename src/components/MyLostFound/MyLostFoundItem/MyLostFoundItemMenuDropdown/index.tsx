@@ -22,7 +22,6 @@ const MyLostFoundItemMenuDropdown = ({
   const menuDropdownContainer = useRef<HTMLDivElement>(null);
 
   const navigate = useNavigate();
-
   useOutsideClick({ ref: menuDropdownContainer, setState: setClose });
 
   return (

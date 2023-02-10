@@ -1,47 +1,19 @@
-import { useGetMyLostFounds } from "../../quries/lostFound/lostFound.query";
-import MyLostFoundItem from "./MyLostFoundItem";
+import { Suspense } from "react";
+import ErrorBoundary from "../Common/ErrorBoundary/ErrorBoundary";
 import {
   MyLostFoundContainer,
-  MyLostFoundEmptyIcon,
-  MyLostFoundEmptyWrap,
-  MyLostFoundLoadingItem,
 } from "./style";
-import { AiOutlineFolderOpen } from "@react-icons/all-files/ai/AiOutlineFolderOpen";
-
+import MyLostFoundDetail from "./MyLostFoundDetail";
+import FallbackSkeleton from "../Common/FallbackSkeleton";
+import NoData from "../Common/NoData";
 const MyLostFound = () => {
-  const {
-    data: serverMyLostFoundData,
-    isLoading: serverMyLostFoundDataIsLoading,
-  } = useGetMyLostFounds();
-
-  const loadingItemArray = Array.from({ length: 6 });
-
   return (
     <MyLostFoundContainer>
-      {serverMyLostFoundDataIsLoading ? (
-        <>
-          {loadingItemArray.map((item, idx) => (
-            <MyLostFoundLoadingItem key={idx} />
-          ))}
-        </>
-      ) : (
-        <>
-          {serverMyLostFoundData?.data.length === 0 ? (
-            <MyLostFoundEmptyWrap>
-              <MyLostFoundEmptyIcon>
-                <AiOutlineFolderOpen />
-              </MyLostFoundEmptyIcon>
-              등록한 분실물이 없습니다
-            </MyLostFoundEmptyWrap>
-          ) : (
-            <>
-              {serverMyLostFoundData?.data.map((lostFound) => (
-                <MyLostFoundItem data={lostFound} key={lostFound.id} />
-              ))}
-            </>
-          )}
-        </>
-      )}
+      <ErrorBoundary fallback={<NoData invalidate={"lostFound/getMyLostFounds"}/>}>
+        <Suspense fallback={<FallbackSkeleton/>}>
+          <MyLostFoundDetail/>
+        </Suspense>
+      </ErrorBoundary>
     </MyLostFoundContainer>
   );
 };

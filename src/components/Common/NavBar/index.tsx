@@ -1,3 +1,4 @@
+//네브바
 import { useGetMyMember } from "../../../quries/member/member.query";
 import dataTransform from "../../../utils/transform/dataTransform";
 import NavBarTab from "./NavBarTab";
@@ -37,6 +38,7 @@ const NavBar = () => {
                 serverMyMemberData?.data?.classroom!,
                 serverMyMemberData?.data?.number!
               )}
+              
             </NavBarClassroom>
           </>
         )}
@@ -47,3 +49,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+

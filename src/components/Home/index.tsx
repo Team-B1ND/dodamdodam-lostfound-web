@@ -1,56 +1,24 @@
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
-import { useRecoilState } from "recoil";
-import {
-  useGetLostFoundsFoundType,
-  useGetLostFoundsLostType,
-} from "../../quries/lostFound/lostFound.query";
-import { homeLostFoundTypeAtom } from "../../store/home/home.store";
+//메인화면
+import { Suspense } from "react";
+import HomeList from './HomeList';
 import HomeDropdown from "./HomeDropdown";
-import HomeItem from "./HomeItem";
-import { HomeContainer, HomeLoadingItem, HomeWrap } from "./style";
-
+import { HomeContainer, HomeWrap } from "./style";
+import ErrorBoundary from "../Common/ErrorBoundary/ErrorBoundary";
+import HomeFallbackSkeleton from "./HomeFallbackSkeleton";
+import NoData from "../Common/NoData";
 const Home = () => {
-  const { ref, inView } = useInView();
-  const [lostFoundType] = useRecoilState(homeLostFoundTypeAtom);
-
-  const homeLoadingItemArray = Array.from({ length: 12 });
-
-  const {
-    data: serverLostFoundFoundData,
-    fetchNextPage: fetchLostFoundFoundNextPage,
-  } = useGetLostFoundsFoundType();
-
-  const {
-    data: serverLostFoundLostData,
-    fetchNextPage: fetchLostFoundLostNextPage,
-  } = useGetLostFoundsLostType();
-
-  useEffect(() => {
-    if (inView) {
-      if (lostFoundType === "LOST") {
-        fetchLostFoundLostNextPage();
-      } else {
-        fetchLostFoundFoundNextPage();
-      }
-    }
-  }, [inView, lostFoundType]);
-
+  const arr:string[]= ["lostFound/getLostFoundsLostType","lostFound/getLostFoundsFoundType"];
+  
   return (
     <HomeContainer>
       <HomeDropdown />
-      <HomeWrap>
-        {(() => {
-          return lostFoundType === "LOST"
-            ? serverLostFoundLostData
-            : serverLostFoundFoundData;
-        })()?.pages?.map((page) =>
-          page.data.map((item) => <HomeItem data={item} key={item.id} />)
-        )}
-        {homeLoadingItemArray.map((item, idx) => (
-          <HomeLoadingItem key={idx} ref={ref} />
-        ))}
-      </HomeWrap>
+        <HomeWrap>
+          <ErrorBoundary fallback={<NoData invalidate={arr}/>}>
+            <Suspense fallback={<HomeFallbackSkeleton/>}>
+              <HomeList/>
+            </Suspense>
+          </ErrorBoundary>
+        </HomeWrap>
     </HomeContainer>
   );
 };

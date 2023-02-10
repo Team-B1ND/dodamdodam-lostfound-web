@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
+import React,{ ReactNode } from "react";
 import DarkModeButton from "../DarkmodeButton";
 import NavBar from "../NavBar";
+
 import {
   PageTemplateContainer,
   PageTemplateContentWrap,
@@ -15,7 +16,7 @@ const PageTemplate = ({ children }: Props) => {
   return (
     <PageTemplateContainer>
       <PageTemplateWrap>
-        <NavBar />
+        <NavBar/>
         <PageTemplateContentWrap>{children}</PageTemplateContentWrap>
         <DarkModeButton />
       </PageTemplateWrap>
