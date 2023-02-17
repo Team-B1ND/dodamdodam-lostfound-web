@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, DragEvent, useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
 import { usePostModuleLog } from "../../quries/log/log.query";
@@ -25,7 +26,7 @@ const useUploadLostFoundImage = () => {
         { formData },
         {
           onSuccess: (res) => {
-            window.alert("이미지 업로드 성공");
+            B1ndToast.showSuccess("이미지 업로드 성공");
             setImage(res.data);
             postModuleLogMutation.mutate({
               description: "분실물/습득물 사진 업로드",
@@ -33,7 +34,7 @@ const useUploadLostFoundImage = () => {
             });
           },
           onError: () => {
-            window.alert("이미지 업로드 실패");
+            B1ndToast.showError("이미지 업로드 실패");
           },
         }
       );

@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -68,7 +69,7 @@ const useModifyLostFound = ({ lostFoundId }: Param) => {
       Object.entries(tempLostFoundData).toString() ===
       Object.entries(modifyLostFoundData).toString()
     ) {
-      window.alert("글을 수정해주세요");
+      B1ndToast.showInfo("글을 수정해주세요");
       return;
     }
 
@@ -76,7 +77,7 @@ const useModifyLostFound = ({ lostFoundId }: Param) => {
       { data: modifyLostFoundData, lostFoundId: Number(lostFoundId) },
       {
         onSuccess: () => {
-          window.alert("분실물 수정 성공");
+          B1ndToast.showSuccess("분실물 수정 성공");
           queryClient.invalidateQueries("lostFound/getMyLostFounds");
           postModuleLogMutation.mutate({
             description: "분실물/습득물 수정",
@@ -86,7 +87,7 @@ const useModifyLostFound = ({ lostFoundId }: Param) => {
           setImage("");
         },
         onError: () => {
-          window.alert("분실물 수정 실패");
+          B1ndToast.showError("분실물 수정 실패");
         },
       }
     );

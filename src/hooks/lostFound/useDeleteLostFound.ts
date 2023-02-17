@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useQueryClient } from "react-query";
 import { usePostModuleLog } from "../../quries/log/log.query";
 import { useDeleteLostFound as useDeleteLostFoundQuery } from "../../quries/lostFound/lostFound.query";
@@ -14,14 +15,14 @@ const useDeleteLostFound = () => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries("lostFound/getMyLostFounds");
-          window.alert("분실물 삭제 성공");
+          B1ndToast.showSuccess("분실물 삭제 성공");
           postModuleLogMutation.mutate({
             description: "분실물/습득물 삭제",
             moduleName: "분실물/습득물 삭제",
           });
         },
         onError: () => {
-          window.alert("분실물 삭제 실패");
+          B1ndToast.showError("분실물 삭제 실패");
         },
       }
     );

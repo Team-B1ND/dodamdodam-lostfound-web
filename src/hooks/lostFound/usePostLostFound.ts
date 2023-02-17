@@ -6,6 +6,7 @@ import { usePostLostFound as usePostLostFoundMutation } from "../../quries/lostF
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import { usePostModuleLog } from "../../quries/log/log.query";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 
 const usePostLostFound = () => {
   const queryClient = useQueryClient();
@@ -36,17 +37,17 @@ const usePostLostFound = () => {
     const { content, title, place } = postData;
 
     if (title === "") {
-      window.alert("제목을 입력해주세요");
+      B1ndToast.showInfo("제목을 입력해주세요");
       return;
     }
 
     if (content === "") {
-      window.alert("내용을 입력해주세요");
+      B1ndToast.showInfo("내용을 입력해주세요");
       return;
     }
 
     if (place === "") {
-      window.alert("장소를 입력해주세요");
+      B1ndToast.showInfo("장소를 입력해주세요");
       return;
     }
 
@@ -59,7 +60,7 @@ const usePostLostFound = () => {
       { data: handlePostData },
       {
         onSuccess: () => {
-          window.alert("분실물 등록 성공");
+          B1ndToast.showSuccess("분실물 등록 성공");
           queryClient.invalidateQueries("lostFound/getLostFoundsLostType");
           queryClient.invalidateQueries("lostFound/getLostFoundsFoundType");
           postModuleLogMutation.mutate({
@@ -77,7 +78,7 @@ const usePostLostFound = () => {
           setImage(null);
         },
         onError: () => {
-          window.alert("분실물 등록 실패");
+          B1ndToast.showError("분실물 등록 실패");
         },
       }
     );
