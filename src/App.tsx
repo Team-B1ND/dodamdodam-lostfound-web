@@ -1,3 +1,4 @@
+import { B1ndToastContainer } from "@b1nd/b1nd-toastify";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
@@ -8,10 +9,11 @@ import useTokenCheck from "./hooks/auth/useTokenCheck";
 function App() {
   const queryClient = new QueryClient();
   useTokenCheck();
-  
+
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
+        <B1ndToastContainer />
         <BrowserRouter basename="/lostfound">
           <ThemeProviderContainer>
             <PageTemplate>
