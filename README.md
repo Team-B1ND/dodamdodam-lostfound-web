@@ -1,46 +1,44 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="./assets/dodam_logo.svg" width="25%" alt="dodamdodam" />
+</p>
+<h4 align="center">학생들을 위한, 학생들이 만든, 스마트스쿨 플랫폼</h4>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [도담도담](https://dodam.b1nd.com/) 이란?
 
-## Available Scripts
+도담도담은 모든 학생과 모든 선생님에게 사고없이 편리함을 제공해줄 수 있는 스마트스쿨 플랫폼으로, 교내 전교생과 모든 선생님들이 사용하고 있어요.
 
-In the project directory, you can run:
+> 아쉽지만 해당 서비스는 대소고학생 들만 사용할 수 있어요 🥲
 
-### `npm start`
+# 도담도담 분실물페이지에서 하는일은?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 도담도담 분실물페이지에서는 학교에서 잃어버리거나, 주운 물건에 대한 글을 작성해서 분실물을 다시 되찾을 수 있어요!
+- 잃어버린 물건은 분실물, 주운 물건은 습득물로 분류되어 보여주고 있어요!
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 기능 리스트
 
-### `npm test`
+- 분실물/습득물 관리 기능
+  - 사진과, 위치, 구분(분실물/습득물), 제목, 내용을 입력하여 분실물/습득물을 등록할 수 있습니다.
+  - 내가 등록한 분실물/습득물을 조회할 수 있습니다.
+  - 현재 올라와있는 분실물/습득물을 조회할 수 있고, 댓글을 달 수 있습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# 일정 페이지 화면
 
-### `npm run build`
+<img src="./assets/screen1.png" width="100%" alt="screen1" />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> 위 사진은 분실물 페이지의 메인페이지에요. 다른 사람들이 올린 분실물과 습득물을 볼 수 있어요.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="./assets/screen3.png" width="100%" alt="screen1" />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> 위 사진은 분실물 페이지의 내 분실물 페이지에요. 자신이 올린 분실물/습득물 등을 따로 볼 수 있어요.
 
-### `npm run eject`
+<img src="./assets/screen4.png" width="100%" alt="screen4" />
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+> 위 사진은 분실물 페이지의 상세 페이지에요. 분실물과 습득물의 상세한 정보를 알 수 있고 댓글을 달 수 있어요.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<img src="./assets/screen2.png" width="100%" alt="screen2" />
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> 위 사진은 분실물 페이지의 작성 페이지에요. 여기서 모든 분실물/습득물 페이지가 작성돼요.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# 기술 스택
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+`TypeScript`, `React`, `Recoil`, `React-Query`, `Styled-Components`, `Axios`
