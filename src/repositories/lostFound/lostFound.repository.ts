@@ -1,4 +1,3 @@
-import customAxios from "../../lib/axios";
 import {
   LostFoundResponse,
   LostFoundsResponse,
@@ -16,79 +15,35 @@ import {
   postLostFoundParam,
 } from "./lostFound.param";
 
-class LostFoundRepository {
-  public async getMyLostFounds(): Promise<MyLostFoundsResponse> {
-    const { data } = await customAxios.get("/lostfound/my");
-    return data;
-  }
-
-  public async getLostFoundsLostType({
+export interface LostFoundRepository {
+  getMyLostFounds(): Promise<MyLostFoundsResponse>;
+  getLostFoundsLostType({
     page,
-  }: getLostFoundsLostTypeParam): Promise<LostFoundsResponse> {
-    const { data } = await customAxios.get(
-      `/lostfound?limit=${12}&page=${page}&type=LOST`
-    );
+  }: getLostFoundsLostTypeParam): Promise<LostFoundsResponse>;
 
-    return { ...data, nextPage: page + 1 };
-  }
-
-  public async getLostFoundsFoundType({
+  getLostFoundsFoundType({
     page,
-  }: getLostFoundsFoundTypeParam): Promise<LostFoundsResponse> {
-    const { data } = await customAxios.get(
-      `/lostfound?limit=${12}&page=${page}&type=FOUND`
-    );
+  }: getLostFoundsFoundTypeParam): Promise<LostFoundsResponse>;
 
-    return { ...data, nextPage: page + 1 };
-  }
+  getLostFound({ id }: getLostFoundParam): Promise<LostFoundResponse>;
 
-  public async getLostFound({
-    id,
-  }: getLostFoundParam): Promise<LostFoundResponse> {
-    const { data } = await customAxios.get(`/lostfound/${id}`);
-    return data;
-  }
-
-  public async postLostFoundComment({
+  postLostFoundComment({
     comment,
     lostFoundId,
-  }: postLostFoundCommentParam): Promise<void> {
-    await customAxios.post(`/lostfound/comment`, {
-      comment,
-      lostFoundId,
-    });
-  }
+  }: postLostFoundCommentParam): Promise<void>;
 
-  public async patchLostFoundComment({
+  patchLostFoundComment({
     comment,
     commentId,
-  }: patchLostFoundCommentParam): Promise<void> {
-    await customAxios.patch("/lostfound/comment", {
-      comment,
-      commentId,
-    });
-  }
+  }: patchLostFoundCommentParam): Promise<void>;
 
-  public async deleteLostFoundComment({
+  deleteLostFoundComment({
     commentId,
-  }: deleteLostFoundCommentParam): Promise<void> {
-    await customAxios.delete(`/lostfound/comment/${commentId}`);
-  }
+  }: deleteLostFoundCommentParam): Promise<void>;
 
-  public async postLostFound({ data }: postLostFoundParam): Promise<void> {
-    await customAxios.post("/lostfound", data);
-  }
+  postLostFound({ data }: postLostFoundParam): Promise<void>;
 
-  public async patchLostFound({
-    data,
-    lostFoundId,
-  }: patchLostFoundParam): Promise<void> {
-    await customAxios.patch("/lostfound", { ...data, lostFoundId });
-  }
+  patchLostFound({ data, lostFoundId }: patchLostFoundParam): Promise<void>;
 
-  public async deleteLostFound({ id }: deleteLostFoundParam) {
-    await customAxios.delete(`/lostfound/${id}`);
-  }
+  deleteLostFound({ id }: deleteLostFoundParam): Promise<void>;
 }
-
-export default new LostFoundRepository();
