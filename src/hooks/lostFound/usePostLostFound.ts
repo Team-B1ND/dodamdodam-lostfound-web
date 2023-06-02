@@ -47,7 +47,7 @@ const usePostLostFound = () => {
     }
 
     if (place === "") {
-      B1ndToast.showInfo("장소를 입력해주세요");
+      B1ndToast.showInfo("위치를 입력해주세요");
       return;
     }
 
