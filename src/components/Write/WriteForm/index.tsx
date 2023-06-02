@@ -31,7 +31,7 @@ import useModifyLostFound from "../../../hooks/lostFound/useModifyLostFound";
 import { IoMdClose } from "@react-icons/all-files/io/IoMdClose";
 
 const WriteForm = () => {
-  const { lostfoundId } = useParams();
+  const { lostfoundid } = useParams();
 
   const [image, setImage] = useRecoilState(writeUploadLostFoundImageAtom);
 
@@ -59,10 +59,10 @@ const WriteForm = () => {
     onSubmitModifyPostData,
     isModifying,
   } = useModifyLostFound({
-    lostFoundId: lostfoundId,
+    lostFoundId: lostfoundid,
   });
 
-  const [isModify] = useState(lostfoundId ? true : false);
+  const [isModify] = useState(lostfoundid ? true : false);
   const [close, setClose] = useState(true);
   const selectInputContainer = useRef<HTMLDivElement | null>(null);
 

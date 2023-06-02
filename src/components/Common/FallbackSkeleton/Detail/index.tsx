@@ -5,7 +5,7 @@ export default function DetailFallback() {
   return (
     <DetailWrap isLoading={true}>
       <S.DetailLoadingImg />
-      <S.DetailLoadingAbleWrap isTall={true} />
+      <S.DetailLoadingAbleWrap height={"89px"} />
       <S.DetailLoadingAbleWrap />
       <S.DetailLoadingAbleWrap />
     </DetailWrap>

@@ -10,9 +10,9 @@ export const DetailLoadingImg = styled.div`
   ${skeletonAnimtaion};
 `;
 
-export const DetailLoadingAbleWrap = styled.div<{ isTall?: boolean }>`
+export const DetailLoadingAbleWrap = styled.div<{ height?: string }>`
   width: 100%;
-  height: ${(props) => (props.isTall ? "89px" : "189px")};
+  height: ${({ height }) => height || "189px"};
   border-radius: 8px;
 
   ${skeletonAnimtaion};

@@ -8,14 +8,14 @@ import NoData from "../Common/NoData";
 import DetailFallback from "../Common/FallbackSkeleton/Detail";
 
 const Detail = () => {
-  const { lostfoundId } = useParams();
+  const { lostfoundid } = useParams();
   return (
     <DetailContainer>
       <ErrorBoundary
         fallback={<NoData invalidate={["lostFound/getLostFound"]} />}
       >
         <Suspense fallback={<DetailFallback />}>
-          <DetailInfo lostfoundId={lostfoundId} />
+          <DetailInfo lostfoundId={lostfoundid} />
         </Suspense>
       </ErrorBoundary>
     </DetailContainer>
