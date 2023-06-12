@@ -8,7 +8,7 @@ interface invalidateProps {
 
 export default function NoData({ invalidate }: invalidateProps) {
   const queryClient = useQueryClient();
-  const [fetch, SetFetch] = useState<boolean | null>(false);
+  const [fetch, SetFetch] = useState<boolean>(false);
 
   const retry = () => {
     SetFetch(true);

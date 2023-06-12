@@ -3,7 +3,7 @@ export const QUERY_KEYS = Object.freeze({
     getMyLostFounds: "lostFound/getMyLostFounds",
     getLostFoundsLostType: "lostFound/getLostFoundsLostType",
     getLostFoundsFoundType: "lostFound/getLostFoundsFoundType",
-    getLostFound: "lostFound/getLostFound",
+    getLostFound: (id: number) => ["lostFound/getLostFound", id],
   },
   member: {
     getMyMember: "member/getMyMember",

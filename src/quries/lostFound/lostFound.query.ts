@@ -91,11 +91,11 @@ export const useGetLostFound = (
     LostFoundResponse,
     AxiosError,
     LostFoundResponse,
-    [string, number]
+    (string | number)[]
   >
 ): UseQueryResult<LostFoundResponse, AxiosError> =>
   useQuery(
-    [QUERY_KEYS.lostFound.getLostFound, id],
+    QUERY_KEYS.lostFound.getLostFound(id),
     () => lostFoundRepositoryImpl.getLostFound({ id }),
     {
       ...options,
