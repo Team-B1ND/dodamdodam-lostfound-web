@@ -12,10 +12,11 @@ export const DetailContainer = styled.div`
   box-sizing: border-box;
 `;
 
-export const DetailWrap = styled.div`
+export const DetailWrap = styled.div<{ isLoading?: boolean }>`
   width: 677px;
   display: flex;
   flex-direction: column;
+  gap: ${(props) => props.isLoading && "10px"};
 `;
 
 export const DetailImg = styled.img`

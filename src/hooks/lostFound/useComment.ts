@@ -6,6 +6,7 @@ import {
   usePatchLostFoundComment,
   usePostLostFoundComment,
 } from "../../quries/lostFound/lostFound.query";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 
 interface Param {
   lostFoundId: number;
@@ -80,25 +81,29 @@ const useComment = ({ lostFoundId }: Param) => {
       return;
     }
 
-    postLostFoundCommentMutation.mutateAsync(
-      {
-        comment,
-        lostFoundId,
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries([
-            "lostFound/getLostFound",
-            lostFoundId,
-          ]);
-          postModuleLogMutation.mutate({
-            description: "분실물/습득물 댓글 등록",
-            moduleName: "분실물/습득물 댓글 등록",
-          });
-          setComment("");
+    if (comment) {
+      postLostFoundCommentMutation.mutateAsync(
+        {
+          comment,
+          lostFoundId,
         },
-      }
-    );
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries([
+              "lostFound/getLostFound",
+              lostFoundId,
+            ]);
+            postModuleLogMutation.mutate({
+              description: "분실물/습득물 댓글 등록",
+              moduleName: "분실물/습득물 댓글 등록",
+            });
+            setComment("");
+          },
+        }
+      );
+    } else {
+      B1ndToast.showInfo("댓글을 입력해주세요.");
+    }
   };
 
   return {

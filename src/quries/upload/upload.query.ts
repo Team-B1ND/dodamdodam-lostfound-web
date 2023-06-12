@@ -1,10 +1,10 @@
 import { useMutation } from "react-query";
 import { postUploadParam } from "../../repositories/upload/upload.param";
-import uploadRepository from "../../repositories/upload/upload.repository";
+import uploadRepositoryImpl from "../../repositories/upload/upload.repositoryImpl";
 
 export const usePostUpload = () => {
   const mutation = useMutation(({ formData }: postUploadParam) =>
-    uploadRepository.postUpload({ formData })
+    uploadRepositoryImpl.postUpload({ formData })
   );
 
   return mutation;

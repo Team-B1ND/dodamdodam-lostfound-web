@@ -38,7 +38,6 @@ const NavBar = () => {
                 serverMyMemberData?.data?.classroom!,
                 serverMyMemberData?.data?.number!
               )}
-              
             </NavBarClassroom>
           </>
         )}
@@ -49,4 +48,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-

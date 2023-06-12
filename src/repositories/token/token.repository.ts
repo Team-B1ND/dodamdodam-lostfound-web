@@ -1,19 +1,8 @@
-import axios from "axios";
 import { TokenRefreshResponse } from "../../types/token/token.type";
 import { postTokenRefreshParam } from "./token.param";
-import config from "../../config/config.json";
 
-class TokenRepository {
-  public async postTokenRefresh({
+export interface TokenRepository {
+  postTokenRefresh({
     refreshToken,
-  }: postTokenRefreshParam): Promise<TokenRefreshResponse> {
-    const { data } = await axios.post(
-      `${config.SERVER}/token/refresh`,
-      refreshToken
-    );
-
-    return data;
-  }
+  }: postTokenRefreshParam): Promise<TokenRefreshResponse>;
 }
-
-export default new TokenRepository();

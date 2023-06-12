@@ -42,6 +42,7 @@ export default function HomeList() {
       })()?.pages?.map((page) =>
         page.data.map((item) => <HomeItem data={item} key={item.id} />)
       )}
+      <div ref={ref} />
     </>
   );
 }

@@ -1,10 +1,11 @@
 import { AxiosError } from "axios";
-import { useInfiniteQuery, 
-  useMutation, 
-  useQuery, 
-  UseQueryOptions, 
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  UseQueryOptions,
   UseQueryResult,
-  UseInfiniteQueryOptions, 
+  UseInfiniteQueryOptions,
   UseInfiniteQueryResult,
 } from "react-query";
 import {
@@ -16,18 +17,25 @@ import {
   deleteLostFoundParam,
   patchLostFoundParam,
 } from "../../repositories/lostFound/lostFound.param";
-import { LostFoundResponse,MyLostFoundsResponse,LostFoundsResponse } from "../../types/lostfound/lostfound.type";
-import lostFoundRepository from "../../repositories/lostFound/lostFound.repository";
+import {
+  LostFoundResponse,
+  MyLostFoundsResponse,
+  LostFoundsResponse,
+} from "../../types/lostfound/lostfound.type";
+import lostFoundRepositoryImpl from "../../repositories/lostFound/lostFound.repositoryImpl";
+import { QUERY_KEYS } from "../queryKey";
 
 export const useGetMyLostFounds = (
   options?: UseQueryOptions<
-  MyLostFoundsResponse,
-  AxiosError,
-  MyLostFoundsResponse,
-  "lostFound/getMyLostFounds"
-  >):UseQueryResult<MyLostFoundsResponse, AxiosError> =>useQuery(
-    "lostFound/getMyLostFounds",
-    () => lostFoundRepository.getMyLostFounds(),
+    MyLostFoundsResponse,
+    AxiosError,
+    MyLostFoundsResponse,
+    string
+  >
+): UseQueryResult<MyLostFoundsResponse, AxiosError> =>
+  useQuery(
+    QUERY_KEYS.lostFound.getMyLostFounds,
+    () => lostFoundRepositoryImpl.getMyLostFounds(),
     {
       ...options,
       staleTime: 1000 * 60 * 60,
@@ -37,17 +45,17 @@ export const useGetMyLostFounds = (
 
 export const useGetLostFoundsLostType = (
   options?: UseInfiniteQueryOptions<
-  LostFoundsResponse,
-  AxiosError,
-  LostFoundsResponse,
-  LostFoundsResponse,
-  "lostFound/getLostFoundsLostType"
->
-):UseInfiniteQueryResult<LostFoundsResponse,AxiosError>=>
+    LostFoundsResponse,
+    AxiosError,
+    LostFoundsResponse,
+    LostFoundsResponse,
+    string
+  >
+): UseInfiniteQueryResult<LostFoundsResponse, AxiosError> =>
   useInfiniteQuery(
-    "lostFound/getLostFoundsLostType",
+    QUERY_KEYS.lostFound.getLostFoundsLostType,
     ({ pageParam = 1 }) =>
-      lostFoundRepository.getLostFoundsLostType({ page: pageParam }),
+      lostFoundRepositoryImpl.getLostFoundsLostType({ page: pageParam }),
     {
       ...options,
       cacheTime: 1000 * 60,
@@ -58,17 +66,17 @@ export const useGetLostFoundsLostType = (
 
 export const useGetLostFoundsFoundType = (
   options?: UseInfiniteQueryOptions<
-  LostFoundsResponse,
-  AxiosError,
-  LostFoundsResponse,
-  LostFoundsResponse,
-  "lostFound/getLostFoundsFoundType"
->
-):UseInfiniteQueryResult<LostFoundsResponse,AxiosError> =>
+    LostFoundsResponse,
+    AxiosError,
+    LostFoundsResponse,
+    LostFoundsResponse,
+    string
+  >
+): UseInfiniteQueryResult<LostFoundsResponse, AxiosError> =>
   useInfiniteQuery(
-    "lostFound/getLostFoundsFoundType",
+    QUERY_KEYS.lostFound.getLostFoundsFoundType,
     ({ pageParam = 1 }) =>
-      lostFoundRepository.getLostFoundsFoundType({ page: pageParam }),
+      lostFoundRepositoryImpl.getLostFoundsFoundType({ page: pageParam }),
     {
       ...options,
       cacheTime: 1000 * 60,
@@ -78,19 +86,20 @@ export const useGetLostFoundsFoundType = (
   );
 
 export const useGetLostFound = (
-  { id }: getLostFoundParam, 
+  { id }: getLostFoundParam,
   options?: UseQueryOptions<
-  LostFoundResponse,
-  AxiosError,
-  LostFoundResponse,
-  ["lostFound/getLostFound", number]
->):UseQueryResult<LostFoundResponse, AxiosError> =>
+    LostFoundResponse,
+    AxiosError,
+    LostFoundResponse,
+    (string | number)[]
+  >
+): UseQueryResult<LostFoundResponse, AxiosError> =>
   useQuery(
-    ["lostFound/getLostFound", id],
-    () => lostFoundRepository.getLostFound({ id }),
+    QUERY_KEYS.lostFound.getLostFound(id),
+    () => lostFoundRepositoryImpl.getLostFound({ id }),
     {
       ...options,
-      enabled: !!id,//true가 되면 lostFoundRepository를 실행
+      enabled: !!id, //true가 되면 lostFoundRepository를 실행
       cacheTime: 1000 * 60,
       staleTime: 1000 * 60,
     }
@@ -99,7 +108,7 @@ export const useGetLostFound = (
 export const usePostLostFoundComment = () => {
   const mutation = useMutation(
     ({ comment, lostFoundId }: postLostFoundCommentParam) =>
-      lostFoundRepository.postLostFoundComment({ comment, lostFoundId })
+      lostFoundRepositoryImpl.postLostFoundComment({ comment, lostFoundId })
   );
   return mutation;
 };
@@ -107,7 +116,7 @@ export const usePostLostFoundComment = () => {
 export const usePatchLostFoundComment = () => {
   const mutation = useMutation(
     ({ comment, commentId }: patchLostFoundCommentParam) =>
-      lostFoundRepository.patchLostFoundComment({ comment, commentId })
+      lostFoundRepositoryImpl.patchLostFoundComment({ comment, commentId })
   );
 
   return mutation;
@@ -115,7 +124,7 @@ export const usePatchLostFoundComment = () => {
 
 export const useDeleteLostFoundComment = () => {
   const mutation = useMutation(({ commentId }: deleteLostFoundCommentParam) =>
-    lostFoundRepository.deleteLostFoundComment({ commentId })
+    lostFoundRepositoryImpl.deleteLostFoundComment({ commentId })
   );
 
   return mutation;
@@ -123,14 +132,14 @@ export const useDeleteLostFoundComment = () => {
 
 export const usePostLostFound = () => {
   const mutation = useMutation(({ data }: postLostFoundParam) =>
-    lostFoundRepository.postLostFound({ data })
+    lostFoundRepositoryImpl.postLostFound({ data })
   );
   return mutation;
 };
 
 export const usePatchLostFound = () => {
   const mutation = useMutation(({ data, lostFoundId }: patchLostFoundParam) =>
-    lostFoundRepository.patchLostFound({ data, lostFoundId })
+    lostFoundRepositoryImpl.patchLostFound({ data, lostFoundId })
   );
 
   return mutation;
@@ -138,7 +147,7 @@ export const usePatchLostFound = () => {
 
 export const useDeleteLostFound = () => {
   const mutation = useMutation(({ id }: deleteLostFoundParam) =>
-    lostFoundRepository.deleteLostFound({ id })
+    lostFoundRepositoryImpl.deleteLostFound({ id })
   );
 
   return mutation;
