@@ -11,11 +11,13 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   lostFoundId: number;
-  onDeleteLostFound: (lostFoundId: number) => void;
+  lostFoundType: string;
+  onDeleteLostFound: (lostFoundId: number, lostFoundType: string) => void;
 }
 
 const MyLostFoundItemMenuDropdown = ({
   lostFoundId,
+  lostFoundType,
   onDeleteLostFound,
 }: Props) => {
   const [close, setClose] = useState(true);
@@ -43,7 +45,7 @@ const MyLostFoundItemMenuDropdown = ({
             수정
           </MyLostFoundItemMenuDropdownItem>
           <MyLostFoundItemMenuDropdownItem
-            onClick={() => onDeleteLostFound(lostFoundId)}
+            onClick={() => onDeleteLostFound(lostFoundId, lostFoundType)}
           >
             삭제
           </MyLostFoundItemMenuDropdownItem>

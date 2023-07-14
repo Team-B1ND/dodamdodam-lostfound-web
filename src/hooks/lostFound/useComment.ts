@@ -77,6 +77,9 @@ const useComment = ({ lostFoundId }: Param) => {
 
   const onSubmitComment = async (e: FormEvent) => {
     e.preventDefault();
+    if (comment.trim() === "") {
+      return B1ndToast.showInfo("댓글을 입력해주세요.");
+    }
     if (postLostFoundCommentMutation.isLoading) {
       return;
     }

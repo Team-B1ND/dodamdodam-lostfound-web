@@ -36,17 +36,17 @@ const usePostLostFound = () => {
   const onSubmitPostData = () => {
     const { content, title, place } = postData;
 
-    if (title === "") {
+    if (title.trim() === "") {
       B1ndToast.showInfo("제목을 입력해주세요");
       return;
     }
 
-    if (content === "") {
+    if (content.trim() === "") {
       B1ndToast.showInfo("내용을 입력해주세요");
       return;
     }
 
-    if (place === "") {
+    if (place.trim() === "") {
       B1ndToast.showInfo("위치를 입력해주세요");
       return;
     }
@@ -60,9 +60,16 @@ const usePostLostFound = () => {
       { data: handlePostData },
       {
         onSuccess: () => {
-          B1ndToast.showSuccess("분실물 등록 성공");
+          B1ndToast.showSuccess(
+            handlePostData.type === "FOUND"
+              ? "습득물 등록 성공"
+              : "분실물 등록 성공"
+          );
+
+          queryClient.invalidateQueries("lostFound/getMyLostFounds");
           queryClient.invalidateQueries("lostFound/getLostFoundsLostType");
           queryClient.invalidateQueries("lostFound/getLostFoundsFoundType");
+
           postModuleLogMutation.mutate({
             description: "분실물/습득물 등록",
             moduleName: "분실물/습득물 등록",

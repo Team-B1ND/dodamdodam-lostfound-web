@@ -60,6 +60,7 @@ const MyLostFoundItem = ({ data }: Props) => {
           <MyLostFoundItemMenuDropdown
             onDeleteLostFound={onDeleteLostFound}
             lostFoundId={data.id}
+            lostFoundType={data.type}
           />
         </MyLostFoundItemMiddleWrap>
       </MyLostFoundItemContainer>

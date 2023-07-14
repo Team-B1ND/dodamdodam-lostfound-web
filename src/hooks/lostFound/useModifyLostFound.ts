@@ -65,6 +65,18 @@ const useModifyLostFound = ({ lostFoundId }: Param) => {
   }, [image]);
 
   const onSubmitModifyPostData = () => {
+    const { content, title, place } = modifyLostFoundData;
+
+    if (content.trim() === "") {
+      return B1ndToast.showInfo("내용을 제대로 수정해주세요.");
+    }
+    if (title.trim() === "") {
+      return B1ndToast.showInfo("제목을 제대로 수정해주세요.");
+    }
+    if (place.trim() === "") {
+      return B1ndToast.showInfo("위치를 제대로 수정해주세요.");
+    }
+
     if (
       Object.entries(tempLostFoundData).toString() ===
       Object.entries(modifyLostFoundData).toString()
@@ -77,7 +89,13 @@ const useModifyLostFound = ({ lostFoundId }: Param) => {
       { data: modifyLostFoundData, lostFoundId: Number(lostFoundId) },
       {
         onSuccess: () => {
-          B1ndToast.showSuccess("분실물 수정 성공");
+          B1ndToast.showSuccess(
+            modifyLostFoundData.type === "FOUND"
+              ? "습득물 수정 성공"
+              : "분실물 수정 성공"
+          );
+          queryClient.invalidateQueries("lostFound/getLostFoundsFoundType");
+          queryClient.invalidateQueries("lostFound/getLostFoundsLostType");
           queryClient.invalidateQueries("lostFound/getMyLostFounds");
           postModuleLogMutation.mutate({
             description: "분실물/습득물 수정",
