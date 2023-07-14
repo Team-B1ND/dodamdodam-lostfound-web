@@ -14,14 +14,15 @@ const useDeleteLostFound = () => {
       { id: lostFoundId },
       {
         onSuccess: () => {
-          lostFoundType === "FOUND"
-            ? queryClient.invalidateQueries("lostFound/getLostFoundsFoundType")
-            : queryClient.invalidateQueries("lostFound/getLostFoundsLostType");
           queryClient.invalidateQueries("lostFound/getMyLostFounds");
+          if (lostFoundType === "FOUND") {
+            queryClient.invalidateQueries("lostFound/getLostFoundsFoundType");
+            B1ndToast.showSuccess("습득물 삭제 성공");
+          } else {
+            queryClient.invalidateQueries("lostFound/getLostFoundsLostType");
+            B1ndToast.showSuccess("분실물 삭제 성공");
+          }
 
-          B1ndToast.showSuccess(
-            lostFoundType === "FOUND" ? "습득물 삭제 성공" : "분실물 삭제 성공"
-          );
           postModuleLogMutation.mutate({
             description: "분실물/습득물 삭제",
             moduleName: "분실물/습득물 삭제",
