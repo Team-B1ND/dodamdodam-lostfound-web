@@ -45,6 +45,7 @@ export const DetailProfileImg = styled.img`
   height: 40px;
   border-radius: 100%;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 export const DetailProfileTextWrap = styled.div`

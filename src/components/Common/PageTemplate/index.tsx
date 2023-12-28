@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import DarkModeButton from "../DarkmodeButton";
-import NavBar from "../NavBar";
+import NavBar from "../Nav";
 
 import {
   PageTemplateContainer,

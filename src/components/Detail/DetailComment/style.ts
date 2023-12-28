@@ -38,8 +38,12 @@ export const DetailCommentButton = styled.button`
   background-color: ${({ theme }) => theme.backgroundColor3};
   color: ${({ theme }) => theme.contrast};
 
-  :hover {
-    filter: brightness(95%);
+  transition: all 0.2s ease-out;
+  &:hover {
+    background-color: #eee;
+  }
+  &:active {
+    background-color: #ddd;
   }
 `;
 

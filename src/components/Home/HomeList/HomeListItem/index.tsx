@@ -23,7 +23,9 @@ const HomeListItem = ({ data }: Props) => {
 
   return (
     <S.HomeItemContainer onClick={redirect}>
-      <S.HomeItemImg src={data.image || NoImage} key={data.id} />
+      <S.HomeItemImgContainer>
+        <S.HomeItemImg src={data.image || NoImage} />
+      </S.HomeItemImgContainer>
 
       <S.HomeItemContentWrap>
         <S.HomeItemTitle>{data.title}</S.HomeItemTitle>
