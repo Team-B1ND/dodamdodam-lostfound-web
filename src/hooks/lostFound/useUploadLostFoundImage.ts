@@ -3,7 +3,7 @@ import { ChangeEvent, DragEvent, useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
 import { usePostModuleLog } from "../../quries/log/log.query";
 import { usePostUpload } from "../../quries/upload/upload.query";
-import { writeUploadLostFoundImageAtom } from "../../store/write/write.store";
+import { writeUploadLostFoundImageAtom } from "../../stores/write/write.store";
 
 const useUploadLostFoundImage = () => {
   const [, setImage] = useRecoilState(writeUploadLostFoundImageAtom);

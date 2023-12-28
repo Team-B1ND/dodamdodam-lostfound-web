@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import customAxios from "../../lib/axios";
 import { usePostModuleLog } from "../../quries/log/log.query";
 import { usePatchLostFound } from "../../quries/lostFound/lostFound.query";
-import { writeUploadLostFoundImageAtom } from "../../store/write/write.store";
+import { writeUploadLostFoundImageAtom } from "../../stores/write/write.store";
 import { LostFoundApply } from "../../types/lostfound/lostfound.type";
 
 interface Param {

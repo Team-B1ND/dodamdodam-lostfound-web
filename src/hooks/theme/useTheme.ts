@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useRecoilState } from "recoil";
 import { THEME_KEY } from "../../constants/theme/theme.constant";
 import { ETheme } from "../../enums/theme/theme.enum";
-import { themeModeAtom } from "../../store/theme/theme.store";
+import { themeModeAtom } from "../../stores/theme/theme.store";
 import { darkTheme, lightTheme } from "../../styles/theme";
 
 const useTheme = () => {
