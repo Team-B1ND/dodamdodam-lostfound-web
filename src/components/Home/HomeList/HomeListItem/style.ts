@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ellipsisLine } from "../../../styles/libStyle";
-import { palette } from "../../../styles/palettes";
+import { ellipsisLine } from "../../../../styles/libStyle";
+import { palette } from "../../../../styles/palettes";
 
 export const HomeItemContainer = styled.div`
   width: 216px;

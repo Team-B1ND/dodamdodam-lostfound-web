@@ -99,7 +99,7 @@ export const useGetLostFound = (
     () => lostFoundRepositoryImpl.getLostFound({ id }),
     {
       ...options,
-      enabled: !!id, //true가 되면 lostFoundRepository를 실행
+      enabled: !!id,
       cacheTime: 1000 * 60,
       staleTime: 1000 * 60,
     }

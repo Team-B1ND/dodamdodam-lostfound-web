@@ -19,7 +19,7 @@ import {
 import { MdPhotoCamera } from "@react-icons/all-files/md/MdPhotoCamera";
 import useUploadLostFoundImage from "../../../hooks/lostFound/useUploadLostFoundImage";
 import { useRecoilState } from "recoil";
-import { writeUploadLostFoundImageAtom } from "../../../store/write/write.store";
+import { writeUploadLostFoundImageAtom } from "../../../stores/write/write.store";
 import Spinner from "../../Common/Spinner/Spinner";
 import usePostLostFound from "../../../hooks/lostFound/usePostLostFound";
 import dataTransform from "../../../utils/transform/dataTransform";

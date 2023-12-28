@@ -2,26 +2,27 @@
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useRecoilState } from "recoil";
-import {
-  useGetLostFoundsFoundType,
-  useGetLostFoundsLostType,
-} from ".././../.././quries/lostFound/lostFound.query";
-import { homeLostFoundTypeAtom } from "../../../store/home/home.store";
-import HomeItem from "../HomeItem";
+import { homeLostFoundTypeAtom } from "../../../stores/home/home.store";
+import HomeListItem from "./HomeListItem";
+import { LostFoundsResponse } from "../../../types/lostfound/lostfound.type";
+import { InfiniteData } from "react-query";
 
-export default function HomeList() {
+interface Props {
+  serverLostFoundFoundData: InfiniteData<LostFoundsResponse>;
+  fetchLostFoundFoundNextPage: () => void;
+
+  serverLostFoundLostData: InfiniteData<LostFoundsResponse>;
+  fetchLostFoundLostNextPage: () => void;
+}
+
+const HomeList = ({
+  serverLostFoundFoundData,
+  fetchLostFoundFoundNextPage,
+  serverLostFoundLostData,
+  fetchLostFoundLostNextPage,
+}: Props) => {
   const { ref, inView } = useInView();
   const [lostFoundType] = useRecoilState(homeLostFoundTypeAtom);
-
-  const {
-    data: serverLostFoundFoundData,
-    fetchNextPage: fetchLostFoundFoundNextPage,
-  } = useGetLostFoundsFoundType({ suspense: true });
-
-  const {
-    data: serverLostFoundLostData,
-    fetchNextPage: fetchLostFoundLostNextPage,
-  } = useGetLostFoundsLostType({ suspense: true });
 
   useEffect(() => {
     if (inView) {
@@ -40,9 +41,11 @@ export default function HomeList() {
           ? serverLostFoundLostData
           : serverLostFoundFoundData;
       })()?.pages?.map((page) =>
-        page.data.map((item) => <HomeItem data={item} key={item.id} />)
+        page.data.map((item) => <HomeListItem data={item} key={item.id} />)
       )}
       <div ref={ref} />
     </>
   );
-}
+};
+
+export default HomeList;

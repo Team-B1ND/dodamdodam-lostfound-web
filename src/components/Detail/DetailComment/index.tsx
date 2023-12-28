@@ -17,26 +17,20 @@ interface Props {
 }
 
 const DetailComment = ({ data, lostFoundId }: Props) => {
-  const {
-    comment,
-    onChangeComment,
-    onSubmitComment,
-    onModifyComment,
-    onDeleteComment,
-    postCommentLoading,
-    patchCommentLoading,
-    deleteCommentLoading,
-  } = useComment({
+  const { ...hooks } = useComment({
     lostFoundId,
   });
 
+  const { postCommentLoading, patchCommentLoading, deleteCommentLoading } =
+    hooks;
+
   return (
     <DetailCommentContainer>
-      <DetailCommentForm onSubmit={onSubmitComment}>
+      <DetailCommentForm onSubmit={hooks.onSubmitComment}>
         <DetailCommentInput
           placeholder="댓글을 입력해주세요"
-          value={comment}
-          onChange={onChangeComment}
+          value={hooks.comment}
+          onChange={hooks.onChangeComment}
           maxLength={100}
         />
         <DetailCommentButton>등록</DetailCommentButton>
@@ -46,8 +40,8 @@ const DetailComment = ({ data, lostFoundId }: Props) => {
           <DetailCommentItem
             data={item}
             key={item.id}
-            onModifyComment={onModifyComment}
-            onDeleteComment={onDeleteComment}
+            onModifyComment={hooks.onModifyComment}
+            onDeleteComment={hooks.onDeleteComment}
           />
         ))}
       </DetailCommentWrap>

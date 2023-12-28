@@ -1,14 +1,5 @@
 import { LostFoundPreview } from "../../../types/lostfound/lostfound.type";
-import {
-  MyLostFoundItemContainer,
-  MyLostFoundItemCreatedAt,
-  MyLostFoundItemImg,
-  MyLostFoundItemInfoWrap,
-  MyLostFoundItemMiddleWrap,
-  MyLostFoundItemPlace,
-  MyLostFoundItemTag,
-  MyLostFoundItemTitle,
-} from "./style";
+import * as S from "./style";
 import NoImage from "../../../assets/image/common/noImage.svg";
 import { palette } from "../../../styles/palettes";
 import dataTransform from "../../../utils/transform/dataTransform";
@@ -38,32 +29,34 @@ const MyLostFoundItem = ({ data }: Props) => {
   return (
     <>
       <Spinner isAbsolute isLoading={isDeleting} />
-      <MyLostFoundItemContainer onClick={redirect}>
-        <MyLostFoundItemImg src={data.image || NoImage} />
-        <MyLostFoundItemMiddleWrap>
-          <MyLostFoundItemInfoWrap>
-            <MyLostFoundItemTitle>{data.title}</MyLostFoundItemTitle>
+      <S.MyLostFoundItemContainer onClick={redirect}>
+        <S.MyLostFoundItemImg src={data.image || NoImage} />
+        <S.MyLostFoundItemMiddleWrap>
+          <S.MyLostFoundItemInfoWrap>
+            <S.MyLostFoundItemTitle>{data.title}</S.MyLostFoundItemTitle>
             <div>
-              <MyLostFoundItemPlace>위치 : {data.place}</MyLostFoundItemPlace>
-              <MyLostFoundItemCreatedAt>
+              <S.MyLostFoundItemPlace>
+                위치 : {data.place}
+              </S.MyLostFoundItemPlace>
+              <S.MyLostFoundItemCreatedAt>
                 작성일 : {data.createAt.slice(0, 10)}
-              </MyLostFoundItemCreatedAt>
+              </S.MyLostFoundItemCreatedAt>
             </div>
-            <MyLostFoundItemTag
+            <S.MyLostFoundItemTag
               backgroundColor={
                 data.type === "FOUND" ? palette.main : palette.sub
               }
             >
               # {dataTransform.lostFoundTypeTransform(data.type)}
-            </MyLostFoundItemTag>
-          </MyLostFoundItemInfoWrap>
+            </S.MyLostFoundItemTag>
+          </S.MyLostFoundItemInfoWrap>
           <MyLostFoundItemMenuDropdown
             onDeleteLostFound={onDeleteLostFound}
             lostFoundId={data.id}
             lostFoundType={data.type}
           />
-        </MyLostFoundItemMiddleWrap>
-      </MyLostFoundItemContainer>
+        </S.MyLostFoundItemMiddleWrap>
+      </S.MyLostFoundItemContainer>
     </>
   );
 };
