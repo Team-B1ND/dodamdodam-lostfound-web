@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { NAVBAR_ITEMS } from "../../../../constants/common/common.constant";
+import { NAV_ITEMS } from "../../../../constants/common/common.constant";
 import { usePostModuleLog } from "../../../../quries/log/log.query";
-import { NavBarTabContaienr, NavBarTabItem } from "./style";
+import { NavTabContaienr, NavTabItem } from "./style";
 
-const NavBarTab = () => {
+const NavTab = () => {
   const { pathname } = useLocation();
 
   const currentPath = `/${pathname.split("/")[1]}`;
@@ -11,9 +11,9 @@ const NavBarTab = () => {
   const postModuleLogMutation = usePostModuleLog();
 
   return (
-    <NavBarTabContaienr>
-      {NAVBAR_ITEMS.map((item) => (
-        <NavBarTabItem
+    <NavTabContaienr>
+      {NAV_ITEMS.map((item) => (
+        <NavTabItem
           isSelect={item.link === currentPath}
           onClick={() => {
             navigate(item.link);
@@ -25,10 +25,10 @@ const NavBarTab = () => {
           key={item.title}
         >
           {item.title}
-        </NavBarTabItem>
+        </NavTabItem>
       ))}
-    </NavBarTabContaienr>
+    </NavTabContaienr>
   );
 };
 
-export default NavBarTab;
+export default NavTab;

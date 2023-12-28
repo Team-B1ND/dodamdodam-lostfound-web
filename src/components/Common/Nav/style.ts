@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { palette } from "../../../styles/palettes";
 
-export const NavBarContainer = styled.div`
+export const NavContainer = styled.div`
   min-width: 340px;
   height: 100%;
   z-index: 1;
@@ -16,14 +16,14 @@ export const NavBarContainer = styled.div`
   border-bottom: 0px;
 `;
 
-export const NavBarLogo = styled.img`
+export const NavLogo = styled.img`
   height: 34px;
   object-fit: scale-down;
   margin-bottom: 20px;
   margin-right: auto;
 `;
 
-export const NavBarProfileWrap = styled.div`
+export const NavProfileWrap = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -33,21 +33,21 @@ export const NavBarProfileWrap = styled.div`
   border-radius: 25px;
 `;
 
-export const NavBarProfile = styled.img`
+export const NavProfile = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 100%;
   object-fit: cover;
 `;
 
-export const NavBarName = styled.h1`
+export const NavName = styled.h1`
   font-size: 18px;
   color: white;
   margin-top: 15px;
   font-weight: bold;
 `;
 
-export const NavBarClassroom = styled.p`
+export const NavClassroom = styled.p`
   font-size: 16px;
   margin-top: 8px;
   color: white;
