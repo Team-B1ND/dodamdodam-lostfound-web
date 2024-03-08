@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { HOME_LOSTFOUND_DROPDOWN_ITEMS } from "../../../constants/home/home.constant";
-import { homeLostFoundTypeAtom } from "../../../store/home/home.store";
+import { homeLostFoundTypeAtom } from "../../../stores/home/home.store";
 import { LostFoundType } from "../../../types/lostfound/lostfound.type";
 import dataTransform from "../../../utils/transform/dataTransform";
 import {

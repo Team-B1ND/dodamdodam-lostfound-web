@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ellipsisLine } from "../../../styles/libStyle";
-import { palette } from "../../../styles/palettes";
+import { ellipsisLine } from "../../../../styles/libStyle";
+import { palette } from "../../../../styles/palettes";
 
 export const HomeItemContainer = styled.div`
   width: 216px;
@@ -13,13 +13,35 @@ export const HomeItemContainer = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  transform: scale(1);
+  transition: all 0.2s ease-in-out;
+  &:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 6px 0 rgba(29, 34, 53, 0.08);
+  }
+`;
+
+export const HomeItemImgContainer = styled.div`
+  min-height: 194px;
+  max-height: 194px;
+  overflow: hidden;
 `;
 
 export const HomeItemImg = styled.img`
   width: 100%;
-  min-height: 194px;
-  max-height: 194px;
+  height: 100%;
   object-fit: cover;
+
+  transform: scale(1);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 6px 0 rgba(29, 34, 53, 0.1);
+  }
+  &:active {
+    transform: scale(1);
+  }
 `;
 
 export const HomeItemContentWrap = styled.div`

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { palette } from "../../../../styles/palettes";
 
-export const NavBarTabContaienr = styled.div`
+export const NavTabContaienr = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@ export const NavBarTabContaienr = styled.div`
   margin-top: 60px;
 `;
 
-export const NavBarTabItem = styled.div<{ isSelect: boolean }>`
+export const NavTabItem = styled.div<{ isSelect: boolean }>`
   width: 100%;
   height: 45px;
   cursor: pointer;

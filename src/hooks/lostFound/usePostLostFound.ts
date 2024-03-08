@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { useRecoilState } from "recoil";
-import { writeUploadLostFoundImageAtom } from "../../store/write/write.store";
+import { writeUploadLostFoundImageAtom } from "../../stores/write/write.store";
 import { LostFoundApply } from "../../types/lostfound/lostfound.type";
 import { usePostLostFound as usePostLostFoundMutation } from "../../quries/lostFound/lostFound.query";
 import { useNavigate } from "react-router-dom";
